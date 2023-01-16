@@ -437,7 +437,8 @@ FunLighten <- function(cols, factor = 1.25) {
 # Function for calculating RPI from the downloaded csv tables
 FunRpi <- function(current.year, n = 4) {
   rpi %>% 
-    mutate(month = gsub("^[^/]+", "", Month)) %>% 
+    #mutate(month = gsub("^[^/]+", "", Month)) %>% 
+    mutate(month = gsub("^[^/]+", "", Date)) %>%
     select(month, Cost.of.Living) %>% 
     filter(month %in% c(paste0("/04/", current.year - n),
                         paste0("/04/", current.year))) %>% 

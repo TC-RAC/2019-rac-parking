@@ -26,11 +26,11 @@ current.year <- 2018
 # If you want to add new data that has been publihsed then change to 
 # TRUE and proceed through the script. Alyways make sure the data you are entering 
 # matches the current.year variable. 
-add.new.data <- FALSE
+add.new.data <- TRUE
 
 # If you have already produced an .Rmd file by running this script, and have 
 # made changes to the .Rmd file and just want to recompile it switch to TRUE.
-# If you want to produce a fresh copy of the template for this eyar switch
+# If you want to produce a fresh copy of the template for this year switch
 # to FALSE
 recompile.rmd <- FALSE
 
@@ -45,12 +45,12 @@ dp.tables <- 1
 if (add.new.data){
   ## after dowloading the Wales files into the data/01-raw folder, enter their
   ## correct filenames here:
-  wal.income.file <-"wal-inc-18-19.csv"
-  wal.expenditure.file <-"wal-exp-18-19.csv"
-  wal.transport.file <-"wal-trans-18-19.csv"
+  wal.income.file <-"orig.wal.inc.22.csv"
+  wal.expenditure.file <-"orig.wal.exp.22.csv"
+  wal.transport.file <-"orig.wal.trans.22.csv"
   
   ## replace with date of access to data:
-  new.date.accessed <- "22.10.2019"
+  new.date.accessed <- "23.11.2022"
 }
 ################################################################################
 ################################################################################
@@ -67,6 +67,7 @@ library(tidyr)
 library(dplyr)
 library(tibble)
 library(RefManageR)
+library(googlesheets4)
 # load existing master file
 master <- readRDS("data/03-processed/master.rds")
 bib.master <- readRDS("data/03-processed/bib.master.rds")
@@ -77,14 +78,19 @@ report.name <- paste0("wales-report-", current.year, "-",
 ## IMPORT AND CLEAN RPI DATA #################################################
 # if RPI file doesn't exist, or if it doesn't have today's date, download it 
 # again. This happens even if you don't add new data.
+
+
 if (!file.exists("data/01-raw/rpi.csv") | 
     format(file.mtime("data/01-raw/rpi.csv"), "%d.%m.%Y") != 
     format(Sys.Date(), "%d.%m.%Y")) {
-  url <- paste0("https://docs.google.com/spreadsheets/d/e/2PACX-1vTisg2eXAykXY-",
-                "jcDJRXBf7LlL8IBFRmwBgJGF6-kcFVTlx96kAurVWCohG1ryXMvtvD1dNvQ6otS2R",
-                "/pub?gid=543857295&single=true&output=csv")
-  
-  download.file(url, destfile = "data/01-raw/rpi.csv", method="curl")}
+  url <- paste0("https://docs.google.com/spreadsheets/d/",
+                "1joRISS6YV3eusMNgFPaHfrtsiPN1skM-mpEZJqD3FUg/",
+                "edit?pli=1#gid=1538913200")
+
+  rpi<-read_sheet(url, sheet = "Inflation, last 10 years")
+  names(rpi)[2]<-"Cost.of.Living"
+  write.csv(rpi,"data/01-raw/rpi.csv")
+  }
 
 if (add.new.data){ 
   ################################################################################
@@ -146,7 +152,7 @@ if (add.new.data){
            year = ifelse(country == "Wales", 
                          as.numeric(format(Sys.Date(), "%Y")), year)) -> bib.master
   
-  # update RPI data acces date and year of publication
+  # update RPI data access date and year of publication
   bib.master %>% 
     mutate(urldate = ifelse(content == "rpi", 
                             as.character(format(Sys.Date(), "%d.%m.%Y")), urldate),
@@ -215,12 +221,13 @@ if(nrow(filter(master, country == "Wales", year == current.year)) == 0) {
                          
                          # compile the report - you can repeat this as many times as you like after 
                          # updating the .Rmd file 
-                         rmarkdown::render(paste0("code/report-rmds/", report.name, ".Rmd"),
-                                           output_file = paste0(report.name, ".pdf"),
-                                           output_dir = "outputs/reports",
-                                           params = list(current.year = current.year,
-                                                         dp.text = dp.text,
-                                                         dp.tables = dp.tables))
+           params = list("current.year" = current.year,
+                                       "dp.text" = dp.text,
+                                       "dp.tables" = dp.tables)
+                         
+                         
+            knitr::knit(input = paste0("code/report-rmds/", report.name, ".Rmd"), 
+                                     output= paste0("outputs/reports/",report.name, ".pdf"))
                          
                          # remove empty folder that the compilation creates
                          unlink(paste0("outputs/reports/", report.name, "_files"), recursive=TRUE)
@@ -235,3 +242,4 @@ if(nrow(filter(master, country == "Wales", year == current.year)) == 0) {
 # the report are saved to /outputs/reports/
 ################################################################################
 ################################################################################
+

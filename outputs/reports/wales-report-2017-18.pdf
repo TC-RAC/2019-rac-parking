@@ -1,0 +1,389 @@
+---
+################################################################################
+##                 YOU CANNOT KNIT THIS FILE DIRECTLY FROM HERE!              ##
+##                 Instead use the wales-update-template.R script             ##
+################################################################################
+output:
+  bookdown::pdf_document2: 
+    toc: FALSE
+fontsize: 12pt
+header-includes:
+  - \usepackage{xcolor}
+  - \usepackage{float}
+  - \usepackage{multirow}
+  - \usepackage{colortbl}
+  - \usepackage{flafter}
+params:
+  current.year: 2019
+  dp.text: 1
+  dp.tables: 1
+bibliography: wales.bib
+csl: apa-with-notes.csl
+---
+
+
+
+---
+title: "Local Authority Parking Finances in Wales 2017 - 18"
+nocite: |
+  @Scotland.i.e.2017, @GB.rpi.2018, @GB.map.2018, @Wales.i.e.2017, @England.i.e.2018
+---
+
+
+
+
+\renewcommand{\arraystretch}{1.2}
+
+# Introduction
+
+This note covers parking finances for the 22 local authorities in Wales. As in England and Scotland, local authorities are required to submit details of all their finances to the Welsh Government in a standard format. They are normally published in October, seven months after the financial year end. This report looks at the section on parking income and expenditure from 2013-14 to 2017-18 and is based primarily on data reported by Statistics for Wales (@Wales.i.e.2017), as well as data reported by English and Scottish Local Government authorities; all of the sources are listed in the references.[^1]
+
+[^1]: Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+The published data is less comprehensive than in England and does not split out on- and off-street parking or show penalty income separately. The figures do not include any commercial off-street parking. In 2017-18, 19 councils showed surpluses and three showed deficits. All councils are now receiving income from parking.
+
+# Summary
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{3cm}>{\raggedleft\arraybackslash}p{3cm}rrrrrr}
+\caption{\label{tab:summary}Summary of parking accounts for Wales (£ millions)}\\
+\toprule
+ &  & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17}\\
+\midrule
+\endfirsthead
+\caption[]{Summary of parking accounts for Wales (£ millions) \textit{(continued)}}\\
+\toprule
+ &  & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+ & Income & 31.5 & 33.9 & 35.8 & 37.4 & 38.5 & 2.9\%\\
+\nopagebreak
+ & Expenditure & 22.3 & 21.8 & 22.0 & 23.4 & 24.1 & 2.7\%\\
+\nopagebreak
+\multirow{-3}{*}{\raggedleft\arraybackslash Parking} & Surplus & 9.3 & 12.1 & 13.8 & 14.0 & 14.4 & 3.2\%\\
+\cmidrule{1-8}\pagebreak[0]
+Total transport & Net expenditure & 306.8 & 278.9 & 271.2 & 270.5 & 265.3 & -1.9\%\\
+\cmidrule{1-8}\pagebreak[0]
+ & Parking surplus as percentage of net transport expenditure & 3.0 & 4.3 & 5.1 & 5.2 & 5.4 & \\*
+\end{longtable}
+\endgroup{}
+
+Table \@ref(tab:summary) shows the summary accounts for local authorities in Wales of the incomes and expenditures arising from parking charges and penalty income both for on- and off-street parking. The income has increased by 2.9 %, the expenditure has increased by 2.7 % and the surplus has increased by 3.2 % compared to the previous fiscal year. Total transport expenditure has fallen by 1.9 % and the surplus now represents 5.4 % of net transport epxenditure. Since 2013-14 income has risen by 22.0% and expenditure has risen by 8.2%. Over the same period the surplus has risen by 55.1%. Figure \@ref(fig:fig1) gives a longer term overview of the trends in incomes, expenditures and surpluses.
+
+<img src="figure/fig1-1.png" alt="Parking revenues--Wales"  />
+
+\newpage
+
+\newpage
+# Income
+
+Total council parking income from all sources in 2017-18 was £38.5 million, 2.9% higher than 2016-17. Note that this includes penalty income, which is not shown separately, but does not include off-street income received by commercial off-street parking facilities. Table \@ref(tab:income) ranks the Welsh councils in terms of parking income.
+
+In Wales as a whole 11 councils increased their income over the past year and 11 decreased their income.   The changes from 2016-17 are mapped[^2] in Figure \@ref(fig:mapincome) in the Annex. The annualised changes over the previous four years are plotted in Figure \@ref(fig:mapincome4), using the same colour palette.
+
+[^2]: Boundary data for this and all further maps is from @GB.map.2018. Contains public sector information licensed under the [Open Government Licence v3.0.](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
+
+(ref:foo) (Boundary data for this map is from @GB.map.2018)
+
+
+The top three Welsh councils by income were Cardiff, Swansea, and Carmarthenshire, and between them accounted for 45.7% of parking income.
+
+The three councils which had the largest year-on-year percentage increases in income were Merthyr Tydfil (up 19.3%), Wrexham (up 14.2%) and Cardiff (up 13.6%).  The biggest decreases were in Rhondda Cynon Taf (17.5%), and Denbighshire (11.3%) (excluding Torfaen where income was under £30,000).
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{3.3cm}rrrrrrr}
+\caption{\label{tab:income}Parking income for Wales (£,000)}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17} & \makecell[c]{Average\\annual\\change\\from\\2013-14}\\
+\midrule
+\endfirsthead
+\caption[]{Parking income for Wales (£,000) \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17} & \makecell[c]{Average\\annual\\change\\from\\2013-14}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Cardiff & 6,613 & 6,900 & 7,257 & 7,599 & 8,629 & \cellcolor{white}{ 13.6\%} & \cellcolor{white}{  6.9\%}\\
+Swansea & 4,618 & 5,171 & 5,446 & 5,666 & 5,932 & \cellcolor{white}{  4.7\%} & \cellcolor{white}{  6.5\%}\\
+Carmarthenshire & 2,448 & 2,815 & 3,106 & 3,092 & 3,035 & \cellcolor{white}{ -1.8\%} & \cellcolor{white}{  5.5\%}\\
+Gwynedd & 2,097 & 2,027 & 2,538 & 2,490 & 2,539 & \cellcolor{white}{  2.0\%} & \cellcolor{white}{  4.9\%}\\
+Pembrokeshire & 1,360 & 1,521 & 1,783 & 1,867 & 1,916 & \cellcolor{white}{  2.6\%} & \cellcolor{white}{  8.9\%}\\
+Conwy & 1,392 & 1,419 & 1,886 & 1,935 & 1,903 & \cellcolor{white}{ -1.6\%} & \cellcolor{white}{  8.1\%}\\
+Powys & 1,196 & 1,363 & 1,602 & 1,684 & 1,653 & \cellcolor{white}{ -1.9\%} & \cellcolor{white}{  8.4\%}\\
+Monmouthshire & 1,183 & 1,250 & 1,421 & 1,522 & 1,535 & \cellcolor{white}{  0.8\%} & \cellcolor{white}{  6.7\%}\\
+Denbighshire & 1,300 & 1,251 & 1,300 & 1,711 & 1,517 & \cellcolor{white}{-11.3\%} & \cellcolor{white}{  3.9\%}\\
+Neath Port Talbot & 1,507 & 1,494 & 1,376 & 1,375 & 1,500 & \cellcolor{white}{  9.1\%} & \cellcolor{white}{ -0.1\%}\\
+Bridgend & 1,357 & 1,268 & 1,220 & 1,127 & 1,139 & \cellcolor{white}{  1.0\%} & \cellcolor{white}{ -4.3\%}\\
+Wrexham & 155 & 1,045 & 896 & 974 & 1,113 & \cellcolor{white}{ 14.2\%} & \cellcolor{white}{ 63.7\%}\\
+Rhondda Cynon Taf & 1,384 & 1,410 & 1,291 & 1,322 & 1,090 & \cellcolor{white}{-17.5\%} & \cellcolor{white}{ -5.8\%}\\
+Ceredigion & 1,123 & 1,150 & 980 & 1,109 & 1,055 & \cellcolor{white}{ -4.8\%} & \cellcolor{white}{ -1.5\%}\\
+Vale of Glamorgan & 955 & 788 & 686 & 764 & 737 & \cellcolor{white}{ -3.5\%} & \cellcolor{white}{ -6.3\%}\\
+Merthyr Tydfil & 832 & 745 & 690 & 608 & 725 & \cellcolor{white}{ 19.3\%} & \cellcolor{white}{ -3.4\%}\\
+Caerphilly & 702 & 721 & 702 & 675 & 641 & \cellcolor{white}{ -5.0\%} & \cellcolor{white}{ -2.2\%}\\
+Isle of Anglesey & 388 & 456 & 523 & 605 & 639 & \cellcolor{white}{  5.6\%} & \cellcolor{white}{ 13.3\%}\\
+Newport & 605 & 621 & 640 & 643 & 591 & \cellcolor{white}{ -8.0\%} & \cellcolor{white}{ -0.6\%}\\
+Flintshire & 296 & 450 & 439 & 599 & 571 & \cellcolor{white}{ -4.6\%} & \cellcolor{white}{ 17.8\%}\\
+Blaenau Gwent & 30 & 38 & 30 & 30 & 30 & \cellcolor{white}{  0.7\%} & \cellcolor{white}{  0.2\%}\\
+Torfaen & 9 & 12 & 5 & 15 & 4 & \cellcolor{white}{-73.3\%} & \cellcolor{white}{-18.4\%}\\
+\midrule
+Total & 31,549 & 33,915 & 35,817 & 37,410 & 38,494 & \cellcolor{white}{  2.9\%} & \cellcolor{white}{  5.1\%}\\*
+\end{longtable}
+\endgroup{}
+
+
+
+# Expenditure
+
+Table \@ref(tab:expenditure) ranks the councils in terms of expenditure on parking.
+
+Overall expenditure has risen by £0.6 million (2.7%) after a rise of £1.4 million last year.
+
+In Wales as a whole 12 councils increased their expenditures over the past year and ten decreased them.   The changes from 2016-17 are mapped in Figure \@ref(fig:mapexpend) in the Annex. The average annual changes over the previous four years are plotted in Figure \@ref(fig:mapexpend4) in the Annex, using the same colour palette.
+
+The largest increase in expenditure occured in Cardiff where it increased by 20.9% while Carmarthenshire and Rhondda Cynon Taf increased by 19.9% and 14.5% respectively. The biggest decreases were in Newport (54.9%), and Blaenau Gwent (44.2%).
+
+
+
+The table also shows the proportion of income taken up by costs in 2017-18. Nationally in Wales it is 62.5% with Cardiff at 55.2%.
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{3.3cm}rrrrrrrr}
+\caption{\label{tab:expenditure}Parking expenditure for Wales (£,000)}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17} & \makecell[c]{Average\\annual\\change\\since\\2013-14} & \makecell[c]{Expenditure\\as\\proportion\\of\\income}\\
+\midrule
+\endfirsthead
+\caption[]{Parking expenditure for Wales (£,000) \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17} & \makecell[c]{Average\\annual\\change\\since\\2013-14} & \makecell[c]{Expenditure\\as\\proportion\\of\\income}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Cardiff & 3,688 & 3,474 & 3,763 & 3,941 & 4,764 & \cellcolor{white}{ 20.9\%} & \cellcolor{white}{  6.6\%} & 55.2\%\\
+Swansea & 3,362 & 3,220 & 3,044 & 3,199 & 3,087 & \cellcolor{white}{ -3.5\%} & \cellcolor{white}{ -2.1\%} & 52.0\%\\
+Carmarthenshire & 1,652 & 2,026 & 1,712 & 1,764 & 2,115 & \cellcolor{white}{ 19.9\%} & \cellcolor{white}{  6.4\%} & 69.7\%\\
+Neath Port Talbot & 1,262 & 1,308 & 1,168 & 1,256 & 1,332 & \cellcolor{white}{  6.0\%} & \cellcolor{white}{  1.4\%} & 88.8\%\\
+Pembrokeshire & 984 & 1,029 & 1,200 & 1,270 & 1,319 & \cellcolor{white}{  3.9\%} & \cellcolor{white}{  7.6\%} & 68.8\%\\
+Gwynedd & 1,300 & 1,100 & 1,130 & 1,135 & 1,157 & \cellcolor{white}{  1.9\%} & \cellcolor{white}{ -2.9\%} & 45.6\%\\
+Denbighshire & 759 & 767 & 842 & 1,053 & 1,053 & \cellcolor{white}{  0.0\%} & \cellcolor{white}{  8.5\%} & 69.4\%\\
+Conwy & 812 & 760 & 828 & 916 & 954 & \cellcolor{white}{  4.2\%} & \cellcolor{white}{  4.1\%} & 50.1\%\\
+Rhondda Cynon Taf & 991 & 864 & 794 & 791 & 906 & \cellcolor{white}{ 14.5\%} & \cellcolor{white}{ -2.2\%} & 83.1\%\\
+Bridgend & 861 & 1,156 & 988 & 833 & 889 & \cellcolor{white}{  6.7\%} & \cellcolor{white}{  0.8\%} & 78.0\%\\
+Powys & 761 & 748 & 763 & 789 & 822 & \cellcolor{white}{  4.1\%} & \cellcolor{white}{  1.9\%} & 49.7\%\\
+Wrexham & 304 & 580 & 580 & 838 & 812 & \cellcolor{white}{ -3.1\%} & \cellcolor{white}{ 27.8\%} & 73.0\%\\
+Vale of Glamorgan & 902 & 637 & 578 & 632 & 686 & \cellcolor{white}{  8.5\%} & \cellcolor{white}{ -6.6\%} & 93.1\%\\
+Flintshire & 807 & 458 & 862 & 726 & 678 & \cellcolor{white}{ -6.5\%} & \cellcolor{white}{ -4.2\%} & 118.8\%\\
+Monmouthshire & 598 & 510 & 490 & 594 & 671 & \cellcolor{white}{ 13.0\%} & \cellcolor{white}{  2.9\%} & 43.7\%\\
+Ceredigion & 845 & 825 & 964 & 589 & 567 & \cellcolor{white}{ -3.6\%} & \cellcolor{white}{ -9.5\%} & 53.8\%\\
+Caerphilly & 491 & 523 & 512 & 658 & 550 & \cellcolor{white}{-16.3\%} & \cellcolor{white}{  2.9\%} & 85.8\%\\
+Merthyr Tydfil & 631 & 651 & 519 & 504 & 510 & \cellcolor{white}{  1.3\%} & \cellcolor{white}{ -5.2\%} & 70.4\%\\
+Blaenau Gwent & 274 & 262 & 340 & 866 & 483 & \cellcolor{white}{-44.2\%} & \cellcolor{white}{ 15.2\%} & 1599.7\%\\
+Isle of Anglesey & 303 & 299 & 337 & 358 & 351 & \cellcolor{white}{ -2.0\%} & \cellcolor{white}{  3.7\%} & 54.9\%\\
+Newport & 589 & 556 & 503 & 633 & 286 & \cellcolor{white}{-54.9\%} & \cellcolor{white}{-16.5\%} & 48.3\%\\
+Torfaen & 77 & 63 & 86 & 87 & 82 & \cellcolor{white}{ -5.7\%} & \cellcolor{white}{  1.6\%} & 2050.0\%\\
+\midrule
+Total & 22,253 & 21,816 & 22,003 & 23,431 & 24,074 & \cellcolor{white}{  2.7\%} & \cellcolor{white}{  2.0\%} & 62.5\%\\*
+\end{longtable}
+\endgroup{}
+
+Table \@ref(tab:propexpend) shows the proportion of income taken up by expenditure. Across Wales it was 62.5% compared to 62.6% in the previous year.
+
+Cardiff's expenditure was 55.2% of its income having risen since last year, while Swansea's has fallen to 52.0%.
+
+Care should be taken in interpreting the percentages towards the bottom of the table, as the very low parking incomes can lead to extreme values which are less meaningful.
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{3.7cm}rrrrr}
+\caption{\label{tab:propexpend}Parking expenditure as a proportion of parking income}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18}\\
+\midrule
+\endfirsthead
+\caption[]{Parking expenditure as a proportion of parking income \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}\textsuperscript{*} Any empty cells indicate the council reported no income and/or no expenditure}\\
+\endlastfoot
+Cardiff & \cellcolor{white}{ 55.8\%} & \cellcolor{white}{ 50.3\%} & \cellcolor{white}{  51.9\%} & \cellcolor{white}{  51.9\%} & \cellcolor{white}{  55.2\%}\\
+Swansea & \cellcolor{white}{ 72.8\%} & \cellcolor{white}{ 62.3\%} & \cellcolor{white}{  55.9\%} & \cellcolor{white}{  56.5\%} & \cellcolor{white}{  52.0\%}\\
+Carmarthenshire & \cellcolor{white}{ 67.5\%} & \cellcolor{white}{ 71.9\%} & \cellcolor{white}{  55.1\%} & \cellcolor{white}{  57.1\%} & \cellcolor{white}{  69.7\%}\\
+Neath Port Talbot & \cellcolor{white}{ 83.7\%} & \cellcolor{white}{ 87.6\%} & \cellcolor{white}{  84.9\%} & \cellcolor{white}{  91.4\%} & \cellcolor{white}{  88.8\%}\\
+Pembrokeshire & \cellcolor{white}{ 72.4\%} & \cellcolor{white}{ 67.7\%} & \cellcolor{white}{  67.3\%} & \cellcolor{white}{  68.0\%} & \cellcolor{white}{  68.8\%}\\
+Gwynedd & \cellcolor{white}{ 62.0\%} & \cellcolor{white}{ 54.3\%} & \cellcolor{white}{  44.5\%} & \cellcolor{white}{  45.6\%} & \cellcolor{white}{  45.6\%}\\
+Denbighshire & \cellcolor{white}{ 58.4\%} & \cellcolor{white}{ 61.3\%} & \cellcolor{white}{  64.8\%} & \cellcolor{white}{  61.5\%} & \cellcolor{white}{  69.4\%}\\
+Conwy & \cellcolor{white}{ 58.4\%} & \cellcolor{white}{ 53.5\%} & \cellcolor{white}{  43.9\%} & \cellcolor{white}{  47.3\%} & \cellcolor{white}{  50.1\%}\\
+Rhondda Cynon Taf & \cellcolor{white}{ 71.6\%} & \cellcolor{white}{ 61.3\%} & \cellcolor{white}{  61.5\%} & \cellcolor{white}{  59.8\%} & \cellcolor{white}{  83.1\%}\\
+Bridgend & \cellcolor{white}{ 63.5\%} & \cellcolor{white}{ 91.2\%} & \cellcolor{white}{  81.0\%} & \cellcolor{white}{  73.8\%} & \cellcolor{white}{  78.0\%}\\
+Powys & \cellcolor{white}{ 63.6\%} & \cellcolor{white}{ 54.9\%} & \cellcolor{white}{  47.6\%} & \cellcolor{white}{  46.9\%} & \cellcolor{white}{  49.7\%}\\
+Wrexham & \cellcolor{white}{196.3\%} & \cellcolor{white}{ 55.5\%} & \cellcolor{white}{  64.8\%} & \cellcolor{white}{  86.0\%} & \cellcolor{white}{  73.0\%}\\
+Vale of Glamorgan & \cellcolor{white}{ 94.5\%} & \cellcolor{white}{ 80.8\%} & \cellcolor{white}{  84.3\%} & \cellcolor{white}{  82.7\%} & \cellcolor{white}{  93.1\%}\\
+Flintshire & \cellcolor{white}{272.3\%} & \cellcolor{white}{101.8\%} & \cellcolor{white}{ 196.4\%} & \cellcolor{white}{ 121.3\%} & \cellcolor{white}{ 118.8\%}\\
+Monmouthshire & \cellcolor{white}{ 50.6\%} & \cellcolor{white}{ 40.8\%} & \cellcolor{white}{  34.5\%} & \cellcolor{white}{  39.0\%} & \cellcolor{white}{  43.7\%}\\
+Ceredigion & \cellcolor{white}{ 75.2\%} & \cellcolor{white}{ 71.7\%} & \cellcolor{white}{  98.4\%} & \cellcolor{white}{  53.1\%} & \cellcolor{white}{  53.8\%}\\
+Caerphilly & \cellcolor{white}{ 69.9\%} & \cellcolor{white}{ 72.5\%} & \cellcolor{white}{  72.9\%} & \cellcolor{white}{  97.5\%} & \cellcolor{white}{  85.8\%}\\
+Merthyr Tydfil & \cellcolor{white}{ 75.9\%} & \cellcolor{white}{ 87.4\%} & \cellcolor{white}{  75.2\%} & \cellcolor{white}{  82.9\%} & \cellcolor{white}{  70.4\%}\\
+Blaenau Gwent & \cellcolor{white}{913.7\%} & \cellcolor{white}{679.6\%} & \cellcolor{white}{1134.8\%} & \cellcolor{white}{2887.2\%} & \cellcolor{white}{1599.7\%}\\
+Isle of Anglesey & \cellcolor{white}{ 78.1\%} & \cellcolor{white}{ 65.6\%} & \cellcolor{white}{  64.4\%} & \cellcolor{white}{  59.2\%} & \cellcolor{white}{  54.9\%}\\
+Newport & \cellcolor{white}{ 97.4\%} & \cellcolor{white}{ 89.6\%} & \cellcolor{white}{  78.5\%} & \cellcolor{white}{  98.5\%} & \cellcolor{white}{  48.3\%}\\
+Torfaen & \cellcolor{white}{855.6\%} & \cellcolor{white}{525.0\%} & \cellcolor{white}{1720.0\%} & \cellcolor{white}{ 580.0\%} & \cellcolor{white}{2050.0\%}\\
+\midrule
+Total & \cellcolor{white}{ 70.5\%} & \cellcolor{white}{ 64.3\%} & \cellcolor{white}{  61.4\%} & \cellcolor{white}{  62.6\%} & \cellcolor{white}{  62.5\%}\\*
+\end{longtable}
+\endgroup{}
+
+\pagebreak
+
+# Surpluses
+
+Table \@ref(tab:surplustab) shows the parking surpluses from from 2013-14 to 2017-18 and the change from 2016-17 to 2017-18. It also shows the proportion that parking surpluses represent of total transport expenditure.
+
+The total *surpluses* for Wales amounted to £15.1 million between 19 authorities of which Cardiff, Swansea, and Gwynedd contributed 53.7%.
+
+\`Three councils made a loss with the total of parking deficits falling to £0.6 million from £1.0 million last year.
+
+Overall, parking contributed £14.4 million to local authority finances in Wales in 2017-18 compared with £14.0 million in 2017-18, an increase of 3.2%.
+
+Newport increased their surplus by 3129.9% while Caerphilly and Wrexham increased by 430.3% and 121.0% respectively. The biggest decreases were in Rhondda Cynon Taf (65.3%), and Vale of Glamorgan (61.4%).
+
+The largest increase of deficit was incurred by Torfaen which increased their deficit by 8.3 % 
+
+The biggest decrease was inBlaenau Gwent where the deficit fell by (45.8 %) 
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{3.3cm}rrrrrrr}
+\caption{\label{tab:surplustab}Parking surpluses for Wales (£,000)}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2013-14} & \multirow{1}{*}[0pt]{2014-15} & \multirow{1}{*}[0pt]{2015-16} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \makecell[c]{Change\\2017-18\\on\\2016-17} & \makecell[c]{Surplus as\\proportion\\of\\transport\\spending}\\
+\midrule
+Cardiff & 2,924 & 3,426 & 3,494 & 3,658 & 3,865 & 5.7\% & 17.5\%\\
+Swansea & 1,256 & 1,951 & 2,402 & 2,467 & 2,845 & 15.3\% & 13.1\%\\
+Gwynedd & 797 & 927 & 1,408 & 1,355 & 1,382 & 2.0\% & 9.4\%\\
+Conwy & 580 & 659 & 1,058 & 1,019 & 949 & -6.9\% & 10.7\%\\
+Carmarthenshire & 795 & 790 & 1,394 & 1,328 & 920 & -30.7\% & 5.5\%\\
+Monmouthshire & 585 & 741 & 931 & 929 & 864 & -7.0\% & 14.4\%\\
+Powys & 436 & 615 & 839 & 895 & 831 & -7.1\% & 7.1\%\\
+Pembrokeshire & 376 & 492 & 583 & 597 & 597 & 0.0\% & 7.2\%\\
+Ceredigion & 278 & 325 & 16 & 520 & 488 & -6.2\% & 4.4\%\\
+Denbighshire & 541 & 484 & 458 & 658 & 464 & -29.5\% & 5.0\%\\
+Newport & 16 & 65 & 137 & 9 & 306 & 3129.9\% & 3.0\%\\
+Wrexham & -149 & 465 & 316 & 136 & 301 & 121.0\% & 3.5\%\\
+Isle of Anglesey & 85 & 157 & 186 & 247 & 288 & 16.6\% & 3.3\%\\
+Bridgend & 496 & 111 & 232 & 295 & 250 & -15.2\% & 2.2\%\\
+Merthyr Tydfil & 201 & 93 & 171 & 104 & 215 & 107.0\% & 4.2\%\\
+Rhondda Cynon Taf & 393 & 545 & 497 & 531 & 184 & -65.3\% & 1.1\%\\
+Neath Port Talbot & 245 & 186 & 208 & 118 & 168 & 42.3\% & 1.2\%\\
+Caerphilly & 211 & 198 & 190 & 17 & 91 & 430.3\% & 0.5\%\\
+Vale of Glamorgan & 53 & 151 & 108 & 132 & 51 & -61.4\% & 0.5\%\\
+Torfaen & -68 & -51 & -81 & -72 & -78 & \em{   8.3\%} & -1.0\%\\
+Flintshire & -511 & -8 & -423 & -127 & -108 & \em{ -15.4\%} & -0.6\%\\
+Blaenau Gwent & -244 & -223 & -310 & -836 & -453 & \em{ -45.8\%} & -7.2\%\\
+\midrule
+Total deficit & -972 & -282 & -814 & -1,035 & -639 & \em{ -38.3\%} & -1.9\%\\
+Total surplus & 10,268 & 12,381 & 14,628 & 15,015 & 15,059 & 0.3\% & 6.5\%\\
+\midrule
+Total & 9,296 & 12,099 & 13,814 & 13,979 & 14,420 & 3.2\% & 5.4\%\\
+\bottomrule
+\multicolumn{8}{l}{\rule{0pt}{1em}\textsuperscript{*} Where the change in surplus is actually a change in deficit, the values are in italics}\\
+\end{longtable}
+\endgroup{}
+
+
+## References {.unnumbered}
+<div id="refs"></div>
+\newpage
+
+# (APPENDIX) Annex {.unnumbered}
+
+## National comparisons {.unnumbered}
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{5cm}rrrrr}
+\caption{\label{tab:compare}Comparison of parking income and expenditure in across the nations of Great Britain (£ millions, latest year available)}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endfirsthead
+\caption[]{Comparison of parking income and expenditure in across the nations of Great Britain (£ millions, latest year available) \textit{(continued)}}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Fiscal year & (2018-19) & (2018-19) & (2017-18) & (2021-22) & (2017-18)\\
+\midrule
+Parking income & 1021.3 & 728.0 & 88.2 & 36.9 & 1787.1\\
+Parking expenditure & 539.6 & 273.5 & 43.6 & 28.5 & 854.8\\
+Surplus & 481.7 & 454.4 & 44.6 & 8.4 & 932.3\\
+\midrule
+Surplus as proportion of income & 47.2\% & 62.4\% & 50.5\% & 22.8\% & 52.2\%\\*
+\end{longtable}
+\endgroup{}
+
+Table \@ref(tab:compare) provides a comparison with London, England excluding London, Wales, and Scotland for the most recent available data, while Table \@ref(tab:change) compares the changes between 2017-18 and the previous year, with the average annual change over the four-year period starting in 2013-14 (or the most recent four-year period for which data is available). In the last year the surpluses for Wales have decreased by -191.2%, which is less than the average annual increase observed over the preceding four years, which was -12.6%.
+
+On average, parking surpluses in Great Britain have risen by about 6.2% annually over the four years compared with 2.1% annually for the Retail Prices Index during the same period (@GB.rpi.2018).
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{6cm}rrrrr}
+\caption{\label{tab:change}Changes in parking income and expenditure over previous four years (from most recent year available) across the nations of Great Britain}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endfirsthead
+\caption[]{Changes in parking income and expenditure over previous four years (from most recent year available) across the nations of Great Britain \textit{(continued)}}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Most recent year available & (2018-19) & (2018-19) & (2017-18) & (2021-22) & (2017-18)\\
+\midrule
+Average annual change in income & 4.3 \% & 5.8 \% & 4.7 \% & -1.0 \% & 4.2 \%\\
+Change in income since previous year & 4.2 \% & 7.1 \% & 6.8 \% & 116.9 \% & 5.3 \%\\
+\midrule
+Average annual change in expenditure & 2.8 \% & 0.0 \% & 2.3 \% & 4.3 \% & 1.3 \%\\
+Change in expenditure since previous year & 5.1 \% & -0.1 \% & 9.2 \% & 8.7 \% & 4.3 \%\\
+\midrule
+Average annual change in surplus & 6.1 \% & 10.2 \% & 7.5 \% & -12.6 \% & 7.3 \%\\
+Change in surplus since previous year & 3.1 \% & 11.9 \% & 4.6 \% & -191.2 \% & 6.2 \%\\*
+\end{longtable}
+\endgroup{}
+
+## Maps {.unnumbered}
+
+<img src="figure/mapexpend-1.png" alt="Map of change in parking expenditure from  2016-17 to 2017-18  (ref:foo)"  />
+
+<img src="figure/mapexpend4-1.png" alt="Map of average annual change in parking expenditure over the past four years from 2013-14 to 2017-18 (ref:foo)"  />
+
+<img src="figure/mapincome-1.png" alt="Map of change in parking income from  2016-17 to 2017-18  (ref:foo)"  />
+
+
+<img src="figure/mapincome4-1.png" alt="Map of average annual change in parking income over the past four years from 2013-14 to 2017-18 (ref:foo)"  />

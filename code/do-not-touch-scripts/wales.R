@@ -86,7 +86,10 @@ bib %>%
 
 # column headers 
 yearz <- paste0("\\multirow{1}{*}[0pt]{",(current.year-4):(current.year), "-",
-                (current.year-4-1999):(current.year-1999),"}")
+          (current.year-4-1999):(current.year-1999),"}")
+
+
+
 
 ################################################################################
 ## cleaning up data for various tables and charts ##############################
@@ -120,7 +123,7 @@ write.csv(wal.summary, here::here(paste0("outputs/csv-tables/wales-",
 # prepare and format data for Summary table
 wal.summary %>% 
   mutate(change = ifelse(rowname == "surplus.of.transport", NA, 
-                         paste(FunDec(change, dp.tables), "\\%"))) %>% 
+                         paste0(FunDec(change, dp.tables), "\\%"))) %>% 
   mutate(rowname = c("Income", "Expenditure", "Surplus", "Net expenditure", 
                      "Parking surplus as percentage of net transport expenditure")) %>% 
   mutate_at(vars(-rowname, -change), function(x) FunDec(x, dp.tables)) %>% 
@@ -299,8 +302,20 @@ sub.gb.ref %>%
   select(most.recent) %>% max() -> gb.mr.year
 
 # RPI calculation 
-rpi.annual.gb <- FunRpi(gb.mr.year, n = 4)
+#new FunRpi Date not Month (Still to be adjusted with Ivo's new RPI sheet)
+FunRpi <- function(current.year, n = 4) {
+ rpi %>%  mutate (Month = format(as.Date(Date), "/%m/%Y")) %>% 
+    select(Month, Cost.of.Living)%>% 
+    filter(Month %in% c(paste0("/04/", current.year - n),
+                        paste0("/04/", current.year))) %>% 
+    mutate(Cost.of.Living = Cost.of.Living + 100,
+           Month = c("start", "end"))  %>% 
+    summarise(rpi = Cost.of.Living[Month == "end"] / Cost.of.Living[Month == "start"]) %>% 
+    mutate(rpi = (rpi ^ (1/n) - 1) * 100) %>% pull(rpi) -> rpi.annual
+  rpi.annual  
+}
 
+rpi.annual.gb <- FunRpi(gb.mr.year, n = 4)
 
 
 ## INCOME ######################################################################
@@ -389,20 +404,14 @@ wal.income.valid %>%
 
 # format income data for tabulation
 wal.income %>% 
-  mutate(change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(wal.income$change, 
-                                                c(wal.income$change, 
-                                                  wal.income$change.4),
-                                                dir = 1, factor = 1)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                             background = 
-                              FunDivergePalette(wal.income$change.4, 
-                                                c(wal.income$change, 
-                                                  wal.income$change.4),
-                                                dir = 1, factor = 1)[[3]])) ->
+                              "white")) ->
   wal.income.formatted
 
 ## EXPENDITURE #################################################################
@@ -509,21 +518,15 @@ wal.expend %>%
 # format table for printing 
 wal.expend %>% 
   mutate(prop.income = ifelse(is.na(prop.income), NA, 
-                              paste(FunDec(prop.income, dp.tables), "\\%"))) %>% 
-  mutate(change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+                              paste0(FunDec(prop.income, dp.tables), "\\%"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(wal.expend$change,
-                                                c(wal.expend$change,
-                                                  wal.expend$change.4),dir = -1,
-                                                factor = 1)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                             background = 
-                              FunDivergePalette(wal.expend$change.4,
-                                                c(wal.expend$change,
-                                                  wal.expend$change.4),dir = -1,
-                                                factor = 1)[[3]])) ->
+                              "white")) ->
   wal.expend.formatted
 
 # calculate proportion of expenditure in income for all LA/year combinations
@@ -555,10 +558,8 @@ write.csv(wal.expend.of.income, here::here(paste0("outputs/csv-tables/wales-",
 wal.expend.of.income %>% 
   mutate_at(vars(-auth.name), function(x) ifelse(is.infinite(x), NA, x)) %>% 
   mutate_at(vars(-auth.name), function(x) { 
-    cell_spec(ifelse(is.na(x), "", paste(FunDec(x, dp.tables), "%")), "latex", 
-              bold = F, background  = spec_color(1/x, begin = 0.3,
-                                                 end = 0.9, option = "D", 
-                                                 na_color = "#FFFFFF"))}) ->
+    cell_spec(ifelse(is.na(x), "", paste0(FunDec(x, dp.tables), "%")), "latex", 
+              bold = F, background  = "white")}) ->
   wal.expend.of.income.formatted
 
 
@@ -706,8 +707,8 @@ wal.deficit.valid %>%
 
 # format surplus table for tabulation
 wal.surplus.totals.table %>% 
-  mutate(change = paste(FunDec(change, dp.tables), "%"),
-         prop.transp = paste(FunDec(prop.transp, dp.tables), "\\%")) %>% 
+  mutate(change = paste0(FunDec(change, dp.tables), "%"),
+         prop.transp = paste0(FunDec(prop.transp, dp.tables), "\\%")) %>% 
   mutate(change =cell_spec(change, "latex", 
                            italic = ifelse(.[[6]] < 0, TRUE, FALSE))) ->
   wal.surplus.formatted

@@ -1,0 +1,266 @@
+First Table
+---------------------------------------------------------------------------------------------\begingroup\fontsize{10}{12}\selectfont
+\begin{table}
+\fontsize{10}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Summary of parking accounts for Wales (£ millions)}           % Caption
+	\label{tab:summary}       % Label
+\begin{tblr}{
+colspec = {rrrrrrrr},
+    hline{1,2,5,6,7,8} = {},
+    	cell{2}{1} = {r = 3}{valign = m},
+}
+&  & 2014-15 & 2015-16 & 2016-17 & 2017-18 & 2018-19 & {Change\\2018-19\\on\\2017-18}\\
+Parking & Income & 33.9 & 35.8 & 37.4 & 38.5 & 41.9 & 8.9 \%\\
+& Expenditure &  21.8 & 22.0 & 23.4 & 24.1 & 25.8 & 7.4 \%\\\
+& Surplus & 12.1 & 13.8 & 14.0 & 14.4 & 16.1& 11.5 \%\\
+Total transport & Net expenditure & 278.9 & 271.2 & 270.5 & 265.3 & 267.1 & 0.7 \%\\
+& {Parking surplus as\\percentage of net\\transport\\expenditure} & 4.3 & 5.1 & 5.2 & 5.4 & 6.0 &\\
+\end{tblr}
+\end{table}
+\endgroup{}
+
+---------------------------------------------------------------------------------------------------------------
+Table 2
+---------------------------------------------------------------------------------------------------------------
+\begingroup\fontsize{10}{12}\selectfont
+\begin{table}
+\fontsize{10}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Comparison of parking income and expenditure in across the nations of Great Britain (£ millions, latest year available)}           % Caption
+	\label{tab:compare}       % Label
+\begin{tblr}{
+colspec = {rrrrrr},
+    hline{1,2,6,7} = {},
+}
+
+ & {England\\without\\London} & London & Scotland & Wales & Great Britain\\
+Fiscal year & (2018-19) & (2018-19) & (2017-18) & (2018-19) & (2018-19) \\
+Parking income & 1021.3 & 728.0 & 88.2 & 41.9 & 1787.1\\
+Parking expenditure & 539.6 & 273.5 & 43.6 & 25.8 & 854.8\\
+Surplus & 481.7 & 454.4 & 44.6 & 16.1 & 932.3\\
+Surplus as proportion of income & 47.2\% & \62.4\% & 50.5\% & 38.4\% & 52.2\%\\
+\end{tblr}
+\end{table}
+\endgroup{}
+
+---------------------------------------------------------------------------------------------------------------
+Table 3
+---------------------------------------------------------------------------------------------------------------
+\begingroup\fontsize{10}{12}\selectfont
+\begin{table}
+\fontsize{10}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Changes in parking income and expenditure over previous four years (from most recent year available) across the nations of Great Britain}           % Caption
+	\label{tab:change}       % Label
+\begin{tblr}{
+colspec = {rrrrrr},
+    hline{1,2,3,5,7,9} = {},
+}
+ & {England\\without\\London} & London & Scotland & Wales & Great Britain\\
+Most recent year available & (2018-19) &{(2018-19)} &{(2017-18)} &{(2018-19)} &{(2017-18)}\\
+Average annual change in income & 4.3 \% & 5.8 \% & 4.7 \% & 5.4 \% & 4.2 \%\\
+{Change in income since previous year} &{4.2 \%} &{7.1 \%} &{6.8 \%} &{8.9 \%} &{5.3 \%}\\
+Average annual change in expenditure & 2.8 \% & 0.0 \% & 2.3 \% & 4.3 \% & 1.3 \%\\
+{Change in expenditure since previous year} &{5.1 \%} &{-0.1 \%} &{9.2 \%} &{7.4 \%} &{4.3 \%}\\
+Average annual change in surplus & 6.1 \% & 10.2 \% & 7.5 \% & 7.4 \% & 7.3 \%\\
+{Change in surplus since previous year} &{3.1 \%} &{11.9 \%} &{4.6 \%} &{11.5 \%} &{6.2 \%}\\
+\end{tblr}
+\end{table}
+\endgroup{}
+
+---------------------------------------------------------------------------------------------------------------
+Table 4
+---------------------------------------------------------------------------------------------------------------
+\begingroup\fontsize{10}{12}\selectfont
+\begin{table}
+\fontsize{10}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Parking income for Wales (£,000)}           % Caption
+	\label{tab:income}       % Label
+\begin{tblr}{
+colspec = {Q[r,m]Q[c,m]Q[c,m]Q[c,m]Q[c,m]Q[c,m]Q[c,m]Q[c,m]},
+    hline{1,2,24,25} = {},
+}
+Local Authority & {2014-15} & {2015-16} & {2016-17} & {2017-18} & {2018-19} & {Change\\2018-19\\on\\2017-18} & {Average\\annual\\change\\from\\2014-15}\\
+{Cardiff} & {6,900} & {7,257} & {7,599} & {8,629} & {9,739} & {12.9 \%} & {  9.0 \%}\\
+Swansea & 5,171 & 5,446 & 5,666 & 5,932 & 6,978 & {17.6 \%} & {  7.8 \%}\\
+{Carmarthenshire} & {2,815} & {3,106} & {3,092} & {3,035} & {2,882} & {-5.0 \%} & {  0.6 \%}\\
+Gwynedd & 2,027 & 2,538 & 2,490 & 2,539 & 2,697 & { 6.2 \%} & {  7.4 \%}\\
+{Conwy} & {1,419} & {1,886} & {1,935} & {1,903} & {2,227} & {17.0 \%} & { 11.9 \%}\\
+Pembrokeshire & 1,521 & 1,783 & 1,867 & 1,916 & 2,173 & {13.4 \%} & {  9.3 \%}\\
+{Powys} & {1,363} & {1,602} & {1,684} & {1,653} & {1,683} & { 1.8 \%} & {  5.4 \%}\\
+Neath Port Talbot & 1,494 & 1,376 & 1,375 & 1,500 & 1,652 & {10.2 \%} & {  2.6 \%}\\
+{Denbighshire} & {1,251} & {1,300} & {1,711} & {1,517} & {1,515} & {-0.1 \%} & {  4.9 \%}\\
+Monmouthshire & 1,250 & 1,421 & 1,522 & 1,535 & 1,446 & {-5.8 \%} & {  3.7 \%}\\
+{Rhondda Cynon Taf} & {1,410} & {1,291} & {1,322} & {1,090} & {1,324} & {21.5 \%} & { -1.6 \%}\\
+Bridgend & 1,268 & 1,220 & 1,127 & 1,139 & 1,211 & { 6.4 \%} & { -1.1 \%}\\
+{Wrexham} & {1,045} & {896} & {974} & {1,113} & {1,067} & {-4.1 \%} & {  0.5 \%}\\
+Ceredigion & 1,150 & 980 & 1,109 & 1,055 & 1,058 & { 0.3 \%} & { -2.1 \%}\\
+{Vale of Glamorgan} & {788} & {686} & {764} & {737} & {807} & { 9.5 \%} & {  0.6 \%}\\
+Flintshire & 450 & 439 & 599 & 571 & 721 & {26.3 \%} & { 12.5 \%}\\
+{Caerphilly} & {721} & {702} & {675} & {641} & {688} & { 7.3 \%} & { -1.1 \%}\\
+Merthyr Tydfil & 745 & 690 & 608 & 725 & 684 & {-5.7 \%} & { -2.1 \%}\\
+{Isle of Anglesey} & {456} & {523} & {605} & {639} & {682} & { 6.7 \%} & { 10.6 \%}\\
+Newport & 621 & 640 & 643 & 591 & 649 & { 9.8 \%} & {  1.1 \%}\\
+{Blaenau Gwent} & {38} & {30} & {30} & {30} & {40} & {30.7 \%} & {  0.7 \%}\\
+Torfaen & 12 & 5 & 15 & 4 & 6 & {50.0 \%} & {-15.9 \%}\\
+
+{Total} & {33,915} & {35,817} & {37,410} & {38,494} & {41,929} & { 8.9 \%} & {  5.4 \%}\\*
+
+\end{tblr}
+\end{table}
+\endgroup{}
+
+---------------------------------------------------------------------------------------------------------------
+Table 5
+---------------------------------------------------------------------------------------------------------------
+
+
+\begingroup\fontsize{9}{11}\selectfont
+\begin{table}
+\fontsize{10}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Parking expenditure for Wales (£,000)}           % Caption
+	\label{tab:expenditure}       % Label
+\begin{tblr}{
+colspec = {Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[c,m]Q[c,m]Q[c,m]},
+    hline{1,2,24,25} = {},
+}
+
+Local Authority & {2014-15} & {2015-16} & {2016-17} &{2017-18} & {2018-19} & {Change\\2018-19\\on\\2017-18} & {Average\\annual\\change\\since\\2014-15} & {Expenditure\\as\\proportion\\of income}\\
+
+{Cardiff} & {3,474} & {3,763} & {3,941} & {4,764} & {5,291} & { 11.1 \%} & { 11.1 \%} & {54.3 \%}\\
+Swansea & 3,220 & 3,044 & 3,199 & 3,087 & 3,697 & { 19.8 \%} & {  3.5 \%} & 53.0 \%\\
+{Carmarthenshire} & {2,026} & {1,712} & {1,764} & {2,115} & {1,925} & { -9.0 \%} & { -1.3 \%} & {66.8 \%}\\
+Neath Port Talbot & 1,308 & 1,168 & 1,256 & 1,332 & 1,480 & { 11.1 \%} & {  3.1 \%} & 89.6 \%\\
+{Pembrokeshire} & {1,029} & {1,200} & {1,270} & {1,319} & {1,370} & {  3.9 \%} & {  7.4 \%} & {63.0 \%}\\
+Rhondda Cynon Taf & 864 & 794 & 791 & 906 & 1,255 & { 38.6 \%} & {  9.8 \%} & 94.8 \%\\
+{Gwynedd} & {1,100} & {1,130} & {1,135} & {1,157} & {1,135} & { -1.9 \%} & {  0.8 \%} & {42.1 \%}\\
+Denbighshire & 767 & 842 & 1,053 & 1,053 & 1,069 & {  1.6 \%} & {  8.7 \%} & 70.6 \%\\
+{Conwy} & {760} & {828} & {916} & {954} & {1,058} & { 10.9 \%} & {  8.6 \%} & {47.5 \%}\\
+Bridgend & 1,156 & 988 & 833 & 889 & 1,007 & { 13.3 \%} & { -3.4 \%} & 83.1 \%\\
+{Caerphilly} & {523} & {512} & {658} & {550} & {990} & { 79.9 \%} & { 17.3 \%} & {143.8 \%}\\
+Powys & 748 & 763 & 789 & 822 & 823 & {  0.1 \%} & {  2.4 \%} & 48.9 \%\\
+{Vale of Glamorgan} & {637} & {578} & {632} & {686} & {706} & {  2.9 \%} & {  2.6 \%} & {87.5 \%}\\
+Monmouthshire & 510 & 490 & 594 & 671 & 667 & { -0.5 \%} & {  7.0 \%} & 46.2 \%\\
+{Wrexham} & {580} & {580} & {838} & {812} & {665} & {-18.2 \%} & {  3.5 \%} & {62.3 \%}\\
+Ceredigion & 825 & 964 & 589 & 567 & 572 & {0.9 \%} & { -8.8 \%} & 54.1 \%\\
+{Newport} & {556} & {503} & {633} & {286} & {468} & { 63.8 \%} & { -4.2 \%} & {72.1 \%}\\
+Merthyr Tydfil & 651 & 519 & 504 & 510 & 404 & {-20.8 \%} & {-11.2 \%} & 59.1 \%\\
+{Flintshire} & {458} & {862} & {726} & {678} & {400} & {-41.1 \%} & { -3.4 \%} & {55.4 \%}\\
+Isle of Anglesey & 299 & 337 & 358 & 351 & 379 & {  8.0 \%} & {  6.1 \%} & 55.6 \%\\
+{Blaenau Gwent} & {262} & {340} & {866} & {483} & {363} & {-25.0 \%} & {  8.5 \%} & {918.1 \%}\\
+Torfaen & 63 & 86 & 87 & 82 & 121 & { 47.6 \%} & { 17.7 \%} & 2016.7 \%\\
+
+{Total} & {21,816} & {22,003} & {23,431} & {24,074} & {25,844} & {  7.4 \%} & {  4.3 \%} & {61.6 \%}\\*
+\end{tblr}
+\end{table}
+\endgroup{}
+
+
+---------------------------------------------------------------------------------------------------------------
+Table 6
+---------------------------------------------------------------------------------------------------------------
+\begingroup\fontsize{10}{10}\selectfont
+\begin{table}
+\fontsize{12}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Parking expenditure as a proportion of parking income}           % Caption
+    \label{tab:propexpend}       % Label
+\begin{tblr}{
+colspec = {Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[r,m]},
+    %hline{1,2,24,25} = {},
+    %cell{25}{1} = {r = 6}{halign = r},
+}
+\hline
+{Local Authority} & {2014-15} & {2015-16} & {2016-17} &{2017-18} & {2018-19}\\
+\hline
+
+{Cardiff} & { 50.3 \%} & {  51.9 \%} & {  51.9 \%} & {  55.2 \%} & {  54.3 \%}\\
+Swansea & { 62.3 \%} &{  55.9 \%} & {  56.5 \%} & {  52.0 \%} & {  53.0 \%}\\
+{Carmarthenshire} & { 71.9 \%} & {  55.1 \%} & {  57.1 \%} & {  69.7 \%} & {  66.8 \%}\\
+Neath Port Talbot & { 87.6 \%} & {  84.9 \%} & {  91.4 \%} & {  88.8 \%} & {  89.6 \%}\\
+{Pembrokeshire} & { 67.7 \%} & {  67.3 \%} & {  68.0 \%} & {  68.8 \%} & {  63.0 \%}\\
+Rhondda Cynon Taf &{ 61.3 \%} & {  61.5 \%} & {  59.8 \%} & {  83.1 \%} & {  94.8 \%}\\
+{Gwynedd} & { 54.3 \%} & {  44.5 \%} & {  45.6 \%} & {  45.6 \%} & {  42.1 \%}\\
+Denbighshire & { 61.3 \%} & {  64.8 \%} & {  61.5 \%} & {  69.4 \%} & {  70.6 \%}\\
+{Conwy} & { 53.5 \%} & {  43.9 \%} & {  47.3 \%} & {  50.1 \%} & {  47.5 \%}\\
+Bridgend &{ 91.2 \%} & {  81.0 \%} & {  73.8 \%} & {  78.0 \%} & {  83.1 \%}\\
+{Caerphilly} & { 72.5 \%} & {  72.9 \%} & {  97.5 \%} & {  85.8 \%} & { 143.8 \%}\\
+Powys & { 54.9 \%} &{  47.6 \%} & {  46.9 \%} & {  49.7 \%} & {  48.9 \%}\\
+{Vale of Glamorgan} & { 80.8 \%} & {  84.3 \%} & {  82.7 \%} & {  93.1 \%} & {  87.5 \%}\\
+Monmouthshire & { 40.8 \%} & {  34.5 \%} & {  39.0 \%} & {  43.7 \%} & {  46.2 \%}\\
+{Wrexham} & { 55.5 \%} & {  64.8 \%} & {  86.0 \%} & {  73.0 \%} & {  62.3 \%}\\
+Ceredigion & { 71.7 \%} & {  98.4 \%} & {  53.1 \%} & {  53.8 \%} & {  54.1 \%}\\
+{Newport} & { 89.6 \%} & {  78.5 \%} & {  98.5 \%} & {  48.3 \%} & {  72.1 \%}\\
+Merthyr Tydfil & { 87.4 \%} & {  75.2 \%} & {  82.9 \%} &{  70.4 \%} & {  59.1 \%}\\
+{Flintshire} & {101.8 \%} & { 196.4 \%} & { 121.3 \%} & { 118.8 \%} & {  55.4 \%}\\
+Isle of Anglesey & { 65.6 \%} & {  64.4 \%} & {  59.2 \%} & {  54.9 \%} & {  55.6 \%}\\
+{Blaenau Gwent} & {679.6 \%} & {1134.8 \%} & {2887.2 \%} & {1599.7 \%} & { 918.1 \%}\\
+Torfaen & {525.0 \%} &{1720.0 \%} & { 580.0 \%} & {2050.0 \%} & {2016.7 \%}\\
+\hline
+{Total} & { 64.3 \%} & {  61.4 \%} & {  62.6 \%} & {  62.5 \%} & {  61.6 \%}\\
+\hline
+\SetCell[c=6]{r}{\footnotesize * Any empty cells indicate the council reported no income and/or no expenditure.}\\
+\end{tblr}
+
+\end{table}
+
+\endgroup{}
+
+
+
+---------------------------------------------------------------------------------------------------------------
+Table 7
+---------------------------------------------------------------------------------------------------------------
+
+\begingroup\fontsize{10}{10}\selectfont
+\begin{table}
+\fontsize{10}{10}\selectfont
+	\centering                       % Center your table
+	\caption{Parking surpluses for Wales (£,000)}           % Caption
+    \label{tab:surplustab}       % Label
+\begin{tblr}{
+colspec = {Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[r,m]Q[c,m]Q[c,m]},
+    %hline{1,2,24,25} = {},
+    %cell{25}{1} = {r = 6}{halign = r},
+}
+
+\hline
+{Local Authority} & {2014-15} & {2015-16} & {2016-17} & {2017-18} & {2018-19} & {Change\\2018-19\\on\\2017-18} & {Surplus as\\proportion of\\transport\\spending}\\
+\hline
+{Cardiff} & {3,426} & {3,494} & {3,658} & {3,865} & {4,448} & {15.1 \%} & {19.5 \%}\\
+Swansea & 1,951 & 2,402 & 2,467 & 2,845 & 3,281 & 15.3 \% & 14.7 \%\\
+{Gwynedd} & {927} & {1,408} & {1,355} & {1,382} & {1,562} & {13.0 \%} & {10.6 \%}\\
+Conwy & 659 & 1,058 & 1,019 & 949 & 1,169 & 23.1 \% & 14.5 \%\\
+{Carmarthenshire} & {790} & {1,394} & {1,328} & {920} & {957} & {4.0 \%} & {5.7 \%}\\
+Powys & 615 & 839 & 895 & 831 & 860 & 3.5 \% & 7.0 \%\\
+{Pembrokeshire} & {492} & {583} & {597} & {597} & {803} & {34.5 \%} & {8.5 \%}\\
+Monmouthshire & 741 & 931 & 929 & 864 & 778 & -9.9 \% & 13.9 \%\\
+{Ceredigion} & {325} & {16} & {520} & {488} & {486} & {-0.4 \%} & {4.7 \%}\\
+Denbighshire & 484 & 458 & 658 & 464 & 445 & -4.1 \% & 4.7 \%\\
+{Wrexham} & {465} & {316} & {136} & {301} & {403} & {33.9 \%} & {5.1 \%}\\
+Flintshire & -8 & -423 & -127 & -108 & 321 & NA \% & 1.7 \%\\
+{Isle of Anglesey} & {157} & {186} & {247} & {288} & {303} & {5.2 \%} & {3.7 \%}\\
+Merthyr Tydfil & 93 & 171 & 104 & 215 & 280 & 30.2 \% & 5.4 \%\\
+{Bridgend} & {111} & {232} & {295} & {250} & {204} & {-18.3 \%} & {1.7 \%}\\
+Newport & 65 & 137 & 9 & 306 & 181 & -40.7 \% & 1.5 \%\\
+{Neath Port Talbot} & {186} & {208} & {118} & {168} & {173} & {2.6 \%} & {1.3 \%}\\
+Vale of Glamorgan & 151 & 108 & 132 & 51 & 101 & 98.0 \% & 1.2 \%\\
+{Rhondda Cynon Taf} & {545} & {497} & {531} & {184} & {69} & {-62.5 \%} & {0.4 \%}\\
+Torfaen & -51 & -81 & -72 & -78 & -115 & \em{ 47.4 \%} & -1.4 \%\\
+{Caerphilly} & {198} & {190} & {17} & {91} & {-302} & {\em{   NA \%}} & {-1.8 \%}\\
+Blaenau Gwent & -223 & -310 & -836 & -453 & -323 & \em{-28.7 \%} & -5.8 \%\\
+\hline
+{Total deficit} & {-282} & {-814} & {-1,035} & {-639} & {-740} & {\em{ 15.9 \%}} & {-2.5 \%}\\
+Total surplus & 12,381 & 14,628 & 15,015 & 15,059 & 16,825 & 11.7 \% & 7.1 \%\\
+\hline
+{Total} & {12,099} & {13,814} & {13,979} & {14,420} & {16,085} & {11.5 \%} & {6.0 \%}\\
+\hline
+\SetCell[c=8]{r}{\footnotesize * Where the change in surplus is actually a change in deficit, the values are in italics}\\
+\end{tblr}
+
+\end{table}
+
+\endgroup{}
