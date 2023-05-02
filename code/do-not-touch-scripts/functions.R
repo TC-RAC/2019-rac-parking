@@ -225,13 +225,28 @@ FunScotlandDPE <- function(list, year) {
   df
 }
 
+# Function to clean up the DPE table extracted from the pdf using tabulizer: POST 2020
 
-# Function to clean up the PNC table extracted from the pdf using tabulizer:
+FunScotlandDPE2020 <- function(list, year) {
+    df <- as.data.frame(list[-1,])
+names(df)<- c("auth.name","dpe.status","dpe.year")
+df %>% filter(auth.name!="Local Authority") %>% 
+  mutate(year=year) %>% 
+  mutate (dpe.status=replace(dpe.status,dpe.status=="DPE","dpe.now")) %>% 
+#Actively working towards:  mutate (dpe.status=replace(dpe.status,dpe.status=="DPE-NEXT","dpe.next")) %>%
+  mutate (dpe.status=replace(dpe.status,dpe.status=="Non-DPE","dpe.not")) %>% 
+  mutate (dpe.year=replace(dpe.year,dpe.year=="N/A",NA))  %>% 
+mutate( year = year,
+        dpe.year = suppressWarnings(as.numeric(dpe.year))) -> df
+df <- df %>% mutate(auth.name, auth.name = recode(auth.name, !!!orig.sco.name.lookup)) 
+df
+}
+# Function to clean up the PCN table extracted from the pdf using tabulizer:
 FunScotlandPCN <- function(df, year) {
   column <- paste0("X", year, ".", year-1999)
   df %>% 
     mutate(pcn.number = gsub("[^0-9]", "", (!!as.name(column))),
-           auth.name = gsub("[^A-Za-z ]", "", Local.Authority),
+           auth.name = gsub("[^A-Za-z ]", "", Local.authority),
            year = year) %>% 
     mutate(pcn.number = ifelse( pcn.number == "", NA, as.numeric(pcn.number))) %>% 
     select(year, auth.name, pcn.number) -> df
@@ -246,10 +261,10 @@ FunScotlandPCN <- function(df, year) {
 # the scotland lookup table 
 FunScotlandTFSIE <- function(df, year) {
   df %>% 
-    filter(Local.Authority != "") %>% 
-    select(auth.name = Local.Authority,
-           income.pcn = PCN,
-           income.tfs = Total,
+    filter(Local.authority != "") %>% 
+    select(auth.name = Local.authority,
+           income.pcn = PCN.income,
+           income.tfs = Total.income,
            expend.tfs = Expenditure) %>% 
     mutate(income.pcn = gsub("[^0-9]", "", income.pcn),
            income.tfs = gsub("[^0-9]", "", income.tfs),
@@ -435,12 +450,11 @@ FunLighten <- function(cols, factor = 1.25) {
 }
 
 # Function for calculating RPI from the downloaded csv tables
+#Tim - Have amended this using Date not Month
 FunRpi <- function(current.year, n = 4) {
-  rpi %>% 
-    #mutate(month = gsub("^[^/]+", "", Month)) %>% 
-    mutate(month = gsub("^[^/]+", "", Date)) %>%
-    select(month, Cost.of.Living) %>% 
-    filter(month %in% c(paste0("/04/", current.year - n),
+  rpi %>%  mutate (Month = format(as.Date(Date), "/%m/%Y")) %>% 
+    select(Month, Cost.of.Living)%>% 
+    filter(Month %in% c(paste0("/04/", current.year - n),
                         paste0("/04/", current.year))) %>% 
     mutate(Cost.of.Living = Cost.of.Living + 100,
            Month = c("start", "end"))  %>% 

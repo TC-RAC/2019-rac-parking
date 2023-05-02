@@ -18,14 +18,14 @@
 
 # which fiscal year do you want to produce a report for?
 # NB: the current year is the year in which the fiscal year starts
-current.year <- 2017
+current.year <- 2021
 
 # if you want to produce a report based on current data - but for a previous year
 # set add.new.data to FALSE. Run the rest of the script.
 # If you want to add new data from GS, TS and Aberdeen council, then change to 
 # TRUE and proceed through the script. Alyways make sure the data you are entering 
 # matches the current.year variable. 
-add.new.data <- FALSE
+add.new.data <- TRUE
 
 # If you have already produced an .Rmd file by running this script, and have 
 # made changes to the .Rmd file and just want to recompile it switch to TRUE.
@@ -35,7 +35,7 @@ recompile.rmd <- FALSE
 
 # number of decimal places in text and tables:
 dp.text <- 1
-dp.tables <- 2
+dp.tables <- 1
 
 
 
@@ -111,10 +111,10 @@ and Expenditure: 2016 to 2017"
 decriminalised-parking-enforcement-local-authorities-income-and-expenditure-2016-to-2017/"
   
   # year published, as it will appear in the references:
-  sco.pdf.year.published <- 2017
+  sco.pdf.year.published <- 2023
   
   ## replace with date of access to data:
-  sco.pdf.date.accessed <- "13.03.2019"
+  sco.pdf.date.accessed <- "06.04.2023"
   
   # path and name of file where you have saved it:
   sco.pdf.file <- "data/01-raw/orig.sco-16-17-pcn.pdf"
@@ -140,12 +140,10 @@ decriminalised-parking-enforcement-local-authorities-income-and-expenditure-2016
 ## LOAD PACKAGES AND DATA ######################################################
 ################################################################################
 source("code/do-not-touch-scripts/functions.R")
-library(tidyr)
-library(dplyr)
-library(tibble)
-library(RefManageR)
-library(readxl)
-library(tabulizer)
+if (!require("pacman")) install.packages("pacman")
+#tabulizer removed as no longer available
+pacman::p_load( tidyr,dplyr,tibble,RefManageR,googlesheets4,knitr,here,kableExtra,showtext,sf,viridis,bookdown,readxl)
+
 options(stringsAsFactors = FALSE)
 
 # load existing master file, bib.master and name lookup table
@@ -329,7 +327,8 @@ if (add.new.data){
   bib.master %>%
     filter(fiscyear > current.year - 5, !content %in% c("budget", "wpl")) %>%
    group_by(country) %>%
-   filter(country %in% c("Wales", "Scotland") | country == "England" & fiscyear == max(fiscyear)) %>%
+  # filter(country %in% c("Wales", "Scotland") | country == "England" & fiscyear == max(fiscyear)) %>%
+  filter(country %in% c("GB","Scotland") | country %in% c("England","Wales") & fiscyear == max(fiscyear)) %>%
     mutate(refs = paste0("@", key)) %>%
     column_to_rownames("key") -> bib.scotland
   
@@ -361,7 +360,8 @@ if(nrow(filter(master, country == "Scotland", year == current.year)) == 0) {
                  # create a fresh copy of the scotland report template
                  file.copy("code/report-templates/scotland-report-template.Rmd",
                            paste0("code/report-rmds/", report.name, ".Rmd"),
-                           overwrite = TRUE)}
+                           overwrite = TRUE)
+                 }
                
                
                # compile the report (but check if file exists first)
@@ -370,6 +370,13 @@ if(nrow(filter(master, country == "Scotland", year == current.year)) == 0) {
                  warning("The Rmd file does not exist. Rerun this script with ",
                        "recompile.rmd swithced to FALSE.")} else { 
                          
+                         suppressWarnings(rm(params))
+                         knitr::opts_chunk$set(
+                           warning = TRUE, # show warnings
+                           message = TRUE, # show messages
+                           error = TRUE, # do not interrupt generation in case of errors,
+                           echo = TRUE  # show R code
+                         )
                          rmarkdown::render(paste0("code/report-rmds/", report.name, ".Rmd"),
                                            output_file = paste0(report.name, ".pdf"),
                                            output_dir = "outputs/reports",

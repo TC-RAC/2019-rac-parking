@@ -196,6 +196,8 @@ write.csv(sum.gb, here::here(paste0("outputs/csv-tables/wales-",
 
 # same as before, but this time add % formatting to the bottom row
 sub.gb.years %>% 
+  # I have added a filter so that it is in the past for running past reports (Tim) 
+  filter(year <= current.year)  %>%
   filter(income > 0) %>% 
   filter(year == max(year))  %>% 
   mutate(prop.of.income = surplus/income,
@@ -216,6 +218,8 @@ sub.gb.years %>%
 # table annual and average changes ############################################
 # extract current year, 1 year back,and 4 years back from to most recent year
 sub.gb.years %>% 
+  # I have added a filter so that it is in the past for running past reports (Tim) 
+  filter(year <= current.year)  %>%
   filter(income != 0) %>% 
   group_by(country) %>% 
   mutate(most.recent = max(year)) %>% 
@@ -356,6 +360,8 @@ wal.income %>%
   group_by(dir) %>% 
   summarise(n = n()) %>% 
   deframe() -> income.bin
+#Add line for no positive results
+if(!("poz" %in% names(income.bin))){income.bin[3]<-0;names(income.bin)[3]<-"poz"}
 
 # select only valid changes
 wal.income %>% 
@@ -463,6 +469,8 @@ wal.expend %>%
   group_by(dir) %>% 
   summarise(n = n()) %>% 
   deframe() -> expend.bin
+#Make sure that all poz is there
+if(!("poz" %in% names(expend.bin))){expend.bin[3]<-0;names(expend.bin)[3]<-"poz"}
 
 # select only valid
 wal.expend %>% 

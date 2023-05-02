@@ -33,7 +33,7 @@ add.new.data <- FALSE
 # made changes to the .Rmd file and just want to recompile it switch to TRUE.
 # If you want to produce a fresh copy of the template for this year switch
 # to FALSE
-recompile.rmd <- FALSE
+recompile.rmd <- TRUE
 
 # number of decimal places in text and tables:
 dp.text <- 1
@@ -175,12 +175,9 @@ if (add.new.data){
 ## LOAD PACKAGES AND DATA ######################################################
 ################################################################################
 source("code/do-not-touch-scripts/functions.R")
-library(tidyr)
-library(dplyr)
-library(tibble)
-library(RefManageR)
-library(readxl)
-library(tabulizer)
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load( tidyr,dplyr,tibble,RefManageR,googlesheets4,knitr,here,kableExtra,showtext,sf,viridis,bookdown)
+
 options(stringsAsFactors = FALSE)
 
 # load existing master file, bib.master and name lookup table

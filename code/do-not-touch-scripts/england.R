@@ -39,6 +39,99 @@ source(here::here("code/do-not-touch-scripts/functions.R"))
 
 # load data
 master <- readRDS(here::here("data/03-processed/master.rds"))
+
+
+#This was code to resolve corrupted LA names if they occur again - changes them here and removes them from master - TC
+
+master%>%   mutate(auth.name= stringr::str_replace(auth.name, " and "," & " )) ->master
+
+master %>% 
+filter(!auth.name %in% c("Enfield D","Buckinghamshire UA D, E, F","Havant E","Charnwood E","Oxford F","Mid Sussex E")) %>%
+  filter(!auth.code %like% "E06") %>% 
+  filter(!(auth.name == "Buckinghamshire"  & year>=2021))-> master
+
+master %>% filter(!(auth.name=="Bournemouth, Christchurch and Poole" & year==2021)) ->master
+master%>%   mutate(auth.name= stringr::str_replace(auth.name, "Bournemouth, Christchurch and Poole","Bournemouth, Christchurch & Poole" )) ->master
+#Add 9999 as AuthCode=NA to allow filtering below
+master$auth.code<-replace_na(master$auth.code,"9999")
+master %>% mutate(auth.name=if_else(auth.code=="E0402","Buckinghamshire UA",auth.name)) ->master
+#Check this in 2024 to see if North Yorkshire code is correct!
+master %>% mutate(auth.name=if_else(auth.code=="E2702", "North Yorkshire UA", auth.name)) ->master
+
+master %>% mutate(auth.name=if_else(auth.code=="E10000027", "Somerset", auth.name)) ->master
+master %>% mutate(auth.name=if_else(auth.code=="E07000246", "Somerset West & Taunton", auth.name)) ->master
+
+#Add and remove LAs by year as they become Unitary Authorities
+master %>% filter(!(auth.name=="West Suffolk" & year>=2022))->master
+#West Suffolk
+if (current.year >= 2019){
+  master %>% filter(!auth.name %in% c("Forest Heath","St Edmundsbury"))->master}else{
+  master %>% filter(auth.name!="West Suffolk")->master}
+#East Suffolk
+if (current.year >= 2019){
+  master %>% filter(!(auth.name %in% c("Suffolk Coastal" ,"Waveney")))->master}else{
+    master %>% filter(auth.name!="East Suffolk")->master}
+
+#Somerset West & Taunton
+if (current.year >= 2019){
+  master %>% filter(!(auth.name %in% c("Taunton Deane" ,"West Somerset")))->master}else{
+    master %>% filter(auth.name!="Somerset West & Taunton")->master}
+#Bournemouth, Christchurch & Poole
+if (current.year >= 2019){
+  master %>% filter(!(auth.name %in% c("Bournemouth" ,"Christchurch","Poole")))->master}else{
+    master %>% filter(auth.name!="Bournemouth, Christchurch & Poole")->master}
+
+
+#Buckinghamshire
+if (current.year >= 2020){
+  master %>% filter(!(auth.name %in% c("South Bucks" ,"Chiltern","Wycombe","Aylesbury Vale","Buckinghamshire")))->master}else{
+    master %>% filter(auth.name!="Buckinghamshire UA")->master}
+#North Northamptonshire
+if (current.year >= 2021){
+  master %>% filter(!(auth.name %in% c("Corby" ,"East Northamptonshire","Kettering","Wellingborough")))->master}else{
+    master %>% filter(auth.name!="North Northamptonshire")->master}
+#West Northamptonshire
+if (current.year >= 2021){
+  master %>% filter(!(auth.name %in% c("Daventry" ,"Northampton","South Northamptonshire")))->master}else{
+    master %>% filter(auth.name!="West Northamptonshire")->master}
+#Cumberland
+if (current.year >= 2023){
+  master %>% filter(!(auth.name %in% c("Allerdale" ,"Carlisle","Copeland")))->master}else{
+    master %>% filter(auth.name!="Cumberland")->master}
+#Westmorland & Furness 
+if (current.year >= 2023){
+  master %>% filter(!(auth.name %in% c("Barrow" ,"Eden","South Lakeland")))->master}else{
+    master %>% filter(auth.name!="Westmorland & Furness")->master}
+#North Yorkshire UA
+if (current.year >= 2023){
+  master %>% filter(!(auth.name %in% c("North Yorkshire" ,"Craven","Hambleton"|auth.name=="Harrogate" |
+                        auth.name=="Richmond","Ryedale" |auth.name=="Scarborough","Selby")))->master}else{
+    master %>% filter(auth.name!="North Yorkshire UA")->master}
+#Dorset 
+if (current.year >= 2019){
+  master %>% filter(!(auth.name %in% c("East Dorset","North Dorset" ,"Purbeck","West Dorset","Weymouth & Portland")))->master}else{
+    master %>% filter(auth.name!="Dorset")->master}
+#Somerset
+if (current.year >= 2023){
+  master %>% filter(!(auth.name %in% c("Somerset West & Taunton" ,"South Somerset","Mendip","Sedgemoor")))->master}else{
+    master %>% filter(auth.name!="Somerset")->master}
+
+
+#Remove duplicates which have crept in for some reason
+master %>% distinct()->master
+master %>% 
+  dplyr::group_by(auth.name, auth.type, year) %>%
+  dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
+  dplyr::filter(n > 1L) -> out
+master %>% filter(!((auth.name %in% out$auth.name) &  (year==current.year) & is.na(surplus.budget))) ->master
+
+master %>% filter(!(auth.code %like% "E07")) -> master
+master %>% distinct(auth.name,year, .keep_all= TRUE) -> master
+
+
+####
+saveRDS(master,here::here("data/03-processed/master.rds"))
+
 orig.eng.name.lookup <- readRDS(here::here("data/01-raw/orig.eng.name.lookup.rds"))
 uc <- st_read(here::here(paste0("data/01-raw/maps/Local_Administrative_Units_",
                                 "Level_1_January_2018_Ultra_Generalised_Clipped_",
@@ -190,7 +283,8 @@ la.data %>%
 la.data %>%
   select(year, surplus.budget) %>% 
   group_by(year) %>% 
-  summarise(surplus.total =  sum(surplus.budget)) %>% 
+# Changed to take out NA data  summarise(surplus.total =  sum(surplus.budget,na.rm=TRUE)) %>% 
+    summarise(surplus.total =  sum(surplus.budget,na.rm=TRUE)) %>% 
   filter(year %in% c(current.year, current.year +1)) -> budget.surplus
 
 # budgeted total for current and next year 
@@ -263,10 +357,10 @@ summary.prep %>%
                   formatC(x, format = "f", 
                           digits = 0, big.mark = ",")))) %>% 
   mutate(change = ifelse(variable == "Parking surplus as percentage of net transport expenditure", NA, 
-                         paste(change, "\\%"))) %>% 
+                         paste0(change, "\\%"))) %>% 
   mutate_at(vars(-variable, -change, -collapsed), function(x) ifelse(
     .$variable == "Parking surplus as percentage of net transport expenditure", 
-    paste0(x, " \\%"), x)) %>% 
+    paste0(x, "\\%"), x)) %>% 
   mutate_at(vars(-collapsed), function(x)  
     ifelse(.$collapsed == "All parking" & .$variable == "Surplus",  
            paste0("\\textbf{", x, "}"), x)) %>% 
@@ -274,8 +368,11 @@ summary.prep %>%
 
 
 # prepare data for london/rest of england summary table. LAs only
+
+
 la.data.current %>% 
-  mutate(london = ifelse(auth.type == "L", "london", "rest")) %>% 
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
+mutate(london = ifelse(auth.type == "L", "london", "rest")) %>% 
   group_by(london) %>% 
   summarise_at(vars(income.on, income.off, income.total,
                     expend.on, expend.off, expend.total,
@@ -295,7 +392,7 @@ la.data.current %>%
   rename(london = `1`, rest = `2`) %>% 
   mutate(total = london + rest,
          prop = london/total*100, 
-         prop = paste(FunDec(prop, dp.tables), "\\%") ) -> summary.london.prep.num
+         prop = paste0(FunDec(prop, dp.tables), "\\%") ) -> summary.london.prep.num
 
 summary.london.prep.num %>% 
   mutate_at(vars(-variable, -prop), function(x) 
@@ -320,7 +417,8 @@ summary.london.prep%>%
 # prepare data for london/rest of england summary table including penalty and fee charges
 # this gets used in the text, not table
 la.data %>% 
-  filter(year %in% c(current.year, current.year -1)) %>% 
+  filter(year %in% c(current.year, current.year -1)) %>%  
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>%  
   mutate(london = ifelse(auth.type == "L", "london", "rest")) %>% 
   group_by(london, year) %>% 
   summarise_at(vars(income.pcn, income.fnp,income.on, income.off, income.total,
@@ -382,7 +480,8 @@ summary$prop.net.expen[5]
 ## comparison for all of GB ###################################################
 # comparing summaries for all three countries
 # get all the data summarised for all 3 countries, separating out London
-master %>% 
+master %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   mutate(country = recode(auth.type, "X" = "X", "L" = "London",
                           .default = country),
          country = recode(country, "England" =  "England without London",
@@ -430,6 +529,8 @@ write.csv(sum.gb, here::here(paste0("outputs/csv-tables/england-",
 # same as before, but add % signs to bottom row for tabulation
 sub.gb.years %>% 
   filter(income > 0) %>% 
+# I have added a filter so that it is in the past for running past reports (Tim) 
+  filter(year <= current.year)  %>%
   filter(year == max(year))  %>% 
   mutate(prop.of.income = surplus/income,
          year = paste0("(", year, "-", year-1999, ")"),
@@ -449,6 +550,8 @@ sub.gb.years %>%
 # table annual and average changes ############################################
 # extract current year, 1 year back,and 4 years back from most recent year
 sub.gb.years %>% 
+  # I have added a filter so that it is in the past for running past reports (Tim) 
+  filter(year <= current.year)  %>%
   filter(income != 0) %>% 
   group_by(country) %>% 
   mutate(most.recent = max(year)) %>% 
@@ -504,7 +607,7 @@ write.csv(sum.gb.change.tab, here::here(paste0("outputs/csv-tables/england-",
 sum.gb.change %>% 
   ungroup() %>% 
   mutate_at(vars(-country, -most.recent), 
-            list(~ paste0(FunDec(., dp.tables), " \\%"))) %>% 
+            list(~ paste0(FunDec(., dp.tables), "\\%"))) %>% 
   t() %>% 
   as.data.frame(stringsAsFactors = FALSE) %>% 
   tibble::rownames_to_column("var") %>% 
@@ -538,6 +641,19 @@ sub.gb.ref %>%
   select(most.recent) %>% max() -> gb.mr.year
 
 # RPI calculation 
+#new FunRpi Date not Month (Still to be adjusted with Ivo's new RPI sheet)
+FunRpi <- function(current.year, n = 4) {
+  rpi %>%  mutate (Month = format(as.Date(Date), "/%m/%Y")) %>% 
+    select(Month, Cost.of.Living)%>% 
+    filter(Month %in% c(paste0("/04/", current.year - n),
+                        paste0("/04/", current.year))) %>% 
+    mutate(Cost.of.Living = Cost.of.Living + 100,
+           Month = c("start", "end"))  %>% 
+    summarise(rpi = Cost.of.Living[Month == "end"] / Cost.of.Living[Month == "start"]) %>% 
+    mutate(rpi = (rpi ^ (1/n) - 1) * 100) %>% pull(rpi) -> rpi.annual
+  rpi.annual  
+}
+
 rpi.annual.gb <- FunRpi(gb.mr.year, n = 4)
 
 
@@ -559,10 +675,13 @@ la.data.all %>%
 
 # clean up income data, add totals row and change variable
 # create three totals row for income data
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   mutate(income.total = income.total /1000) %>% 
   select(auth.name, year, income.total, auth.type) %>% 
+  #pivot_wider(names_from=year,values_from=income.total) %>% 
+  distinct() %>% 
   spread(key = year, value = income.total) %>% 
   arrange(desc(!!as.name(current.year))) %>% 
   mutate(auth.name = ifelse(auth.type == "L", "Total for London", "Total for rest of England")) %>% 
@@ -574,10 +693,12 @@ bind_rows(group_by(. ,auth.name) %>%
               mutate(auth.name='Total for all of England')) -> income.totals
 
 # only london income
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   mutate(income.total = income.total /1000) %>% 
   select(auth.name, year, income.total, auth.type) %>% 
+  distinct() %>% 
   spread(key = year, value = income.total) %>% 
   arrange(desc(!!as.name(current.year))) %>% 
   filter(auth.type == "L") %>% 
@@ -600,10 +721,12 @@ write.csv(  eng.income.london, here::here(paste0("outputs/csv-tables/england-",
 
 
 # only non-london income
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   mutate(income.total = income.total /1000) %>% 
-  select(auth.name, year, income.total, auth.type) %>% 
+  select(auth.name, year, income.total, auth.type) %>%
+  distinct() %>% 
   spread(key = year, value = income.total) %>% 
   arrange(desc(!!as.name(current.year))) %>% 
   filter(auth.type != "L") %>% 
@@ -625,9 +748,11 @@ write.csv(eng.income.rest, here::here(paste0("outputs/csv-tables/england-",
 
 
 # all councils income for appendix
-la.data %>% 
+la.data %>%    
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   select(auth.name, year, income.total, auth.type) %>% 
+  distinct() %>% 
   spread(key = year, value = income.total) %>% 
   arrange(desc(!!as.name(current.year))) %>% 
   bind_rows(income.totals) %>% 
@@ -651,20 +776,13 @@ write.csv(eng.income, here::here(paste0("outputs/csv-tables/england-",
 # format table for london
 eng.income.london %>% 
   mutate(auth.name = gsub("&", "\\\\&", auth.name),
-         change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+         change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
-                            background = 
-                              FunDivergePalette(eng.income.london$change, 
-                                                c(eng.income.london$change, 
-                                                  eng.income.london$change.4),
-                                                dir = 1, factor = 1.2)[[3]]),
+                            background = "white"),
          change.4 = cell_spec(change.4, "latex",
                               background = 
-                                FunDivergePalette(eng.income.london$change.4, 
-                                                  c(eng.income.london$change, 
-                                                    eng.income.london$change.4),
-                                                  dir = 1, factor = 1.2)[[3]])) %>% 
+                                "white")) %>% 
   as_tibble() ->  eng.income.london.formatted
 
 
@@ -672,40 +790,28 @@ eng.income.london %>%
 # format table for kable rest of england
 eng.income.rest %>% 
   mutate(auth.name = gsub("&", "\\\\&", auth.name),
-         change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+         change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(eng.income.rest$change, 
-                                                c(eng.income.rest$change, 
-                                                  eng.income.rest$change.4),
-                                                dir = 1, factor = 1.2)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                               background = 
-                                FunDivergePalette(eng.income.rest$change.4, 
-                                                  c(eng.income.rest$change, 
-                                                    eng.income.rest$change.4),
-                                                  dir = 1, factor = 1.2)[[3]])) %>% 
+                                "white")) %>% 
   as_tibble() ->
   eng.income.rest.formatted
 
 # format table for kable rest of england
 eng.income %>% 
   mutate(auth.name = gsub("&", "\\\\&", auth.name),
-         change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+         change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(eng.income.rest$change, 
-                                                c(eng.income.rest$change, 
-                                                  eng.income.rest$change.4),
-                                                dir = 1, factor = 1.2)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                               background = 
-                                FunDivergePalette(eng.income.rest$change.4, 
-                                                  c(eng.income.rest$change, 
-                                                    eng.income.rest$change.4),
-                                                  dir = 1, factor = 1.2)[[3]])) %>% 
+                                "white")) %>% 
   as_tibble() ->
   eng.income.formatted
 
@@ -833,10 +939,12 @@ summary.london.prep.plus %>%
 
 # get england totals for expenditure for each year in data,
 # create three totals row for expenditure data
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   mutate(expend.total = expend.total /1000) %>% 
   select(auth.name, auth.type, year, expend.total) %>% 
+  distinct() %>% 
   spread(key = year, value = expend.total) %>% 
   full_join(la.data %>% 
               select(auth.name, year, income.total) %>% 
@@ -852,10 +960,12 @@ la.data %>%
 
 
 # only london expenditure
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   mutate(expend.total = expend.total /1000) %>% 
   select(auth.name, year, expend.total, auth.type) %>% 
+  distinct() %>% 
   spread(key = year, value = expend.total) %>% 
   full_join(la.data %>% 
               select(auth.name, year, income.total) %>% 
@@ -886,10 +996,12 @@ write.csv(eng.expend.london, here::here(paste0("outputs/csv-tables/england-",
 
 
 # rest of england expenditure, with totals
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   mutate(expend.total = expend.total /1000) %>% 
-  select(auth.name, year, expend.total, auth.type) %>% 
+  select(auth.name, year, expend.total, auth.type) %>%
+  distinct() %>% 
   spread(key = year, value = expend.total) %>% 
   full_join(la.data %>% 
               select(auth.name, year, income.total) %>% 
@@ -923,6 +1035,7 @@ write.csv(eng.expend.rest, here::here(paste0("outputs/csv-tables/england-",
 la.data %>% 
   filter(year <= current.year) %>% 
   select(auth.name, year, expend.total, auth.type) %>% 
+  distinct() %>% 
   spread(key = year, value = expend.total) %>% 
   full_join(la.data %>% 
               select(auth.name, year, income.total) %>% 
@@ -955,20 +1068,14 @@ eng.expend.london %>%
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate(prop.income = ifelse(is.na(prop.income), NA, 
                               paste0(FunDec(prop.income, dp.tables), "~\\%"))) %>% 
-  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), " %")),
-         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), " %"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(eng.expend.london$change,
-                                                c(eng.expend$change,
-                                                  eng.expend$change.4),dir = -1,
-                                                factor = 1)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                               background = 
-                                FunDivergePalette(eng.expend.london$change.4,
-                                                  c(eng.expend$change,
-                                                    eng.expend$change.4),dir = -1,
-                                                  factor = 1)[[3]])) ->
+                                "white")) ->
   eng.expend.london.formatted
 
 
@@ -977,20 +1084,14 @@ eng.expend.rest %>%
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate(prop.income = ifelse(is.na(prop.income), NA, 
                               paste0(FunDec(prop.income, dp.tables), "~\\%"))) %>% 
-  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), " %")),
-         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), " %"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(eng.expend.rest$change,
-                                                c(eng.expend$change,
-                                                  eng.expend$change.4),dir = -1,
-                                                factor = 1)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                               background = 
-                                FunDivergePalette(eng.expend.rest$change.4,
-                                                  c(eng.expend$change,
-                                                    eng.expend$change.4),dir = -1,
-                                                  factor = 1)[[3]])) ->
+                                "white")) ->
   eng.expend.rest.formatted
 
 
@@ -999,20 +1100,14 @@ eng.expend %>%
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate(prop.income = ifelse(is.na(prop.income), NA, 
                               paste0(FunDec(prop.income, dp.tables), "~\\%"))) %>% 
-  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), " %")),
-         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), " %"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(eng.expend$change,
-                                                c(eng.expend$change,
-                                                  eng.expend$change.4),dir = -1,
-                                                factor = 1)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
                               background = 
-                                FunDivergePalette(eng.expend$change.4,
-                                                  c(eng.expend$change,
-                                                    eng.expend$change.4),dir = -1,
-                                                  factor = 1)[[3]])) ->
+                                "white")) ->
   eng.expend.formatted
 
 
@@ -1092,7 +1187,8 @@ eng.expend %>%
 ## second set of expenditure tables on proportion of income. 
 # first get the totals 
 
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   select(auth.name, auth.type, year, expend.total, income.total) %>% 
   filter(year <= current.year) %>% 
   mutate(auth.name = ifelse(auth.type == "L", "Total for London", "Total for rest of England")) %>% 
@@ -1116,9 +1212,11 @@ la.data %>%
 # get propo of expenditure in income for london borougns only
 la.data %>% 
   select(auth.name, year, expend.total, income.total, auth.type) %>% 
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>%  
   filter(year <= current.year, auth.type == "L") %>% 
   mutate(expend.prop = expend.total/income.total*100) %>% 
   select(auth.name, year, expend.prop) %>%
+  distinct %>% 
   spread(key = year, value = expend.prop) %>% 
   arrange(desc(!!as.name(current.year))) %>% 
   bind_rows(expend.props.totals) -> eng.expend.props.london
@@ -1130,11 +1228,13 @@ write.csv(eng.expend.props.london, here::here(paste0("outputs/csv-tables/england
           row.names = FALSE)
 
 # get propo of expenditure in income for rest of england 
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   select(auth.name, year, expend.total, income.total, auth.type) %>% 
   filter(year <= current.year, auth.type != "L") %>% 
   mutate(expend.prop = expend.total/income.total*100) %>% 
   select(auth.name, year, expend.prop) %>%
+  distinct() %>% 
   spread(key = year, value = expend.prop) %>% 
   arrange(desc(!!as.name(current.year))) %>% 
   filter(!is.infinite(!!as.name(current.year))) %>% 
@@ -1152,6 +1252,7 @@ la.data %>%
   filter(year <= current.year) %>% 
   mutate(expend.prop = expend.total/income.total*100) %>% 
   select(auth.name, year, expend.prop) %>%
+  distinct() %>% 
   spread(key = year, value = expend.prop) %>% 
   mutate_at(vars(-auth.name), function(x) ifelse(is.infinite(x), NA, x)) %>%
   arrange(desc(!!as.name(current.year))) %>% 
@@ -1168,10 +1269,8 @@ eng.expend.props.london %>%
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate_at(vars(-auth.name), function(x) ifelse(is.infinite(x), NA, x)) %>% 
   mutate_at(vars(-auth.name), function(x) { 
-    cell_spec(ifelse(is.na(x), "", paste(FunDec(x, dp.tables), "%")), "latex", 
-              background  = spec_color(1/x, begin = 0.3,
-                                       end = 0.9, option = "D", 
-                                       na_color = "#FFFFFF"))}) ->
+    cell_spec(ifelse(is.na(x), "", paste0(FunDec(x, dp.tables), "%")), "latex", 
+              background  = "white")}) ->
   eng.expend.props.london.formatted
 
 
@@ -1180,10 +1279,8 @@ eng.expend.props.rest %>%
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate_at(vars(-auth.name), function(x) ifelse(is.infinite(x), NA, x)) %>% 
   mutate_at(vars(-auth.name), function(x) { 
-    cell_spec(ifelse(is.na(x), "", paste(FunDec(x, dp.tables), "%")), "latex", 
-              background  = spec_color(1/x, begin = 0.3,
-                                       end = 0.9, option = "D", 
-                                       na_color = "#FFFFFF"))}) ->
+    cell_spec(ifelse(is.na(x), "", paste0(FunDec(x, dp.tables), "%")), "latex", 
+              background  = "white")}) ->
   eng.expend.props.rest.formatted
 
 # format for tabulation all of england
@@ -1191,10 +1288,8 @@ eng.expend.props %>%
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate_at(vars(-auth.name), function(x) ifelse(is.infinite(x), NA, x)) %>% 
   mutate_at(vars(-auth.name), function(x) { 
-    cell_spec(ifelse(is.na(x), "", paste(FunDec(x, dp.tables), "%")), "latex", 
-              background  = spec_color(1/x, begin = 0.3,
-                                       end = 0.9, option = "D", 
-                                       na_color = "#FFFFFF"))}) ->
+    cell_spec(ifelse(is.na(x), "", paste0(FunDec(x, dp.tables), "%")), "latex", 
+              background  = "white")}) ->
   eng.expend.props.formatted
 
 
@@ -1250,6 +1345,7 @@ sur.rest.tot.ch <- summary.london.prep.plus$rest.this[11]/
 # london surplus table  #######################################################
 # clean up surplus data
 data %>% 
+    mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(auth.type == "L") %>% 
   filter(year <= current.year) %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1266,7 +1362,8 @@ london.surplus %>%
   deframe() -> surplus.bin
 
 # create totals row for surpluses and deficits. 
-data %>% 
+data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(auth.type == "L") %>% 
   filter(year <= current.year) %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1308,7 +1405,7 @@ write.csv(london.surplus.totals.table, here::here(
 # format for tabulation
 london.surplus.totals.table  %>% 
   mutate(change = ifelse(is.na(change), NA, 
-                         paste(FunDec(change, dp.tables), "%"))) %>% 
+                         paste0(FunDec(change, dp.tables), "%"))) %>% 
   mutate(change =cell_spec(change, "latex", 
                            italic = ifelse(is.na(.[[7]]), FALSE,
                                            ifelse(.[[6]] < 0 , TRUE, FALSE)))) %>% 
@@ -1453,7 +1550,8 @@ london.surplus.totals.table %>%
 
 # top 20 surplus table  not london ############################################
 # clean up surplus data
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year,
          auth.type != "L") %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1463,7 +1561,8 @@ la.data %>%
 
 # not london full table ############################################
 # clean up surplus data
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year,
          auth.type != "L") %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1472,7 +1571,8 @@ la.data %>%
 
 
 # create totals row for surpluses and deficits. 
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(auth.type != "L") %>% 
   filter(year <= current.year) %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1491,7 +1591,8 @@ la.data %>%
   rename_all(~c("auth.name", (current.year-4):(current.year))) -> eng.rest.sur.def
 
 # create totals row for surpluses and deficits. 
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year,
          auth.type != "L") %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1522,7 +1623,7 @@ eng.rest.surplus.totals.table  %>%
   slice(1:20, (n()-2):(n())) %>%  
   mutate(auth.name = gsub("&", "\\\\&", auth.name)) %>% 
   mutate(change = ifelse(is.na(change), NA, 
-                         paste(FunDec(change, dp.tables), "%"))) %>% 
+                         paste0(FunDec(change, dp.tables), "%"))) %>% 
   mutate(change =cell_spec(change, "latex", 
                            italic = ifelse(is.na(.[[7]]), FALSE,
                                            ifelse(.[[6]] < 0 , TRUE, FALSE)))) %>% 
@@ -1540,7 +1641,8 @@ la.data %>%
   arrange(desc(.[[6]]))  -> eng.surplus.full
 
 # get numbers of +/-/0 surplus change
-la.data %>% 
+la.data %>%   
+  mutate(auth.type = stringr::str_replace(auth.type, "LB", "L")) %>% 
   filter(year <= current.year) %>% 
   filter(auth.type != "L") %>% 
   select(auth.name, year, surplus.total) %>% 
@@ -1593,7 +1695,7 @@ write.csv(rest.surplus.totals.table.full, here::here(
 # format for tabulation
 rest.surplus.totals.table.full  %>% 
   mutate(change = ifelse(is.na(change), NA, 
-                         paste(FunDec(change, dp.tables), "%"))) %>% 
+                         paste0(FunDec(change, dp.tables), "%"))) %>% 
   mutate(change =cell_spec(change, "latex", 
                            italic = ifelse(is.na(.[[7]]), FALSE,
                                            ifelse(.[[6]] < 0 , TRUE, FALSE)))) %>% 
@@ -1824,7 +1926,7 @@ cong.ch.prep %>%
   mutate_at(vars(-variable),
             function(x) ifelse(is.na(x), NA,
                                ifelse(.$variable == "Expenditure as \\% of income",
-                                paste(FunDec(x, dp.tables), "\\%"),
+                                paste0(FunDec(x, dp.tables), "\\%"),
                                 FunDec(x, 0)))) -> cong.ch.formatted
 
 # easy access variables for the text

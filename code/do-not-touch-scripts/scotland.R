@@ -11,6 +11,8 @@
 
 ## preliminaries ###############################################################
 current.year <- params$current.year
+#current.year <- current.year
+
 # knitr options
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = FALSE)
 knitr::opts_chunk$set(fig.pos = 'H')
@@ -56,6 +58,16 @@ suppressWarnings(dir.create(here::here(paste0("outputs/csv-tables/scotland-", Fu
                             showWarnings =TRUE))
 
 ## data preparation ############################################################
+#Ensure that Eilean Siar changed to Na h-Eileanan an Iar
+master%>%   mutate(auth.name= stringr::str_replace(auth.name, "Eilean Siar","Na h-Eileanan an Iar" )) ->master
+master%>%   mutate(auth.name= stringr::str_replace(auth.name, " and "," & " )) ->master
+
+#Resolve Alignment tag issue
+master%>%   mutate(auth.name= stringr::str_replace(auth.name, " & "," and " )) ->master
+
+saveRDS(master,here::here("data/03-processed/master.rds"))
+
+
 # extract relevant country subset of data for all years
 master %>% 
   filter(country == "Scotland") %>% 
@@ -86,10 +98,11 @@ bib %>%
   filter(country == "Scotland", fiscyear == 2013, content == "pcn") %>% 
   pull(refs) -> sco.bib.old.pcn
 
-# map reference
+# map reference 
 bib %>% 
   filter( content == "map") %>% 
   pull(refs) -> sco.bib.map
+
 
 # rpi reference
 bib %>% 
@@ -106,6 +119,8 @@ yearz <- paste0("\\multirow{1}{*}[0pt]{",(current.year-4):(current.year), "-",
 
 ## INTRODUCTION ################################################################
 # clean up DPE status table
+renamelu<-c(dpe.next = "dpe.next_auth.name" , dpe.not = "dpe.not_auth.name")
+
 data.current %>% 
   select(auth.name, dpe.status, dpe.year) %>% 
   arrange(dpe.status) %>% 
@@ -119,11 +134,16 @@ data.current %>%
   group_by(temp) %>% 
   mutate(id = 1:n()) %>% 
   spread(temp, value) %>% 
-  select(-dpe.next_dpe.year, -dpe.not_dpe.year) %>% 
+  select(-any_of(c("dpe.next_dpe.year", "dpe.not_dpe.year"))) %>% 
   unite(dpe.now, dpe.now_auth.name, dpe.now_dpe.year, sep = " (") %>% 
   mutate(dpe.now = paste0(dpe.now, ")")) %>% 
-  rename(dpe.next = dpe.next_auth.name , dpe.not = dpe.not_auth.name) %>% 
-  select(dpe.now, dpe.next, dpe.not) -> sco.dpe 
+  rename(any_of(renamelu)) %>% 
+  #Changed to line above incase no rows rename(dpe.next = dpe.next_auth.name , dpe.not = dpe.not_auth.name) %>% 
+  select(any_of(c("dpe.now", "dpe.next", "dpe.not"))) -> sco.dpe 
+
+if(!("dpe.next" %in% names(sco.dpe))){add_column(sco.dpe," ",.after ="dpe.now")->sco.dpe;names(sco.dpe)[2]<-"dpe.next"}
+if(!("dpe.now" %in% names(sco.dpe))){add_column(sco.dpe," ",.before ="dpe.next")->sco.dpe;names(sco.dpe)[2]<-"dpe.now"}
+if(!("dpe.not" %in% names(sco.dpe))){add_column(sco.dpe," ",.after ="dpe.next")->sco.dpe;names(sco.dpe)[2]<-"dpe.not"}
 
 # save csv table 1
 write.csv(sco.dpe, here::here(paste0("outputs/csv-tables/scotland-",
@@ -180,7 +200,7 @@ master %>%
 # prepare summary data for tabulation
 sco.summary %>% 
   mutate(change = ifelse(rowname == "surplus.of.transport", NA, 
-                         paste(FunDec(change, dp.tables), "\\%"))) %>% 
+                         paste0(FunDec(change, dp.tables), "\\%"))) %>% 
   mutate(rowname = c("Income", "Expenditure", "Surplus", "Net expenditure", 
                      "Parking surplus as percentage of net transport expenditure"))  %>% 
   mutate_at(vars(-rowname, -change), function(x) FunDec(x, dp.tables)) %>% 
@@ -245,6 +265,8 @@ write.csv(sum.gb, here::here(paste0("outputs/csv-tables/scotland-",
 # same as before, but add % signs to bottom row for tabulation
 sub.gb.years %>% 
   filter(income > 0) %>% 
+  # I have added a filter so that it is in the past for running past reports (Tim) 
+  filter(year <= current.year)  %>%
   filter(year == max(year))  %>% 
   mutate(prop.of.income = surplus/income,
          year = paste0("(", year, "-", year-1999, ")"),
@@ -265,6 +287,8 @@ sub.gb.years %>%
 # table annual and average changes ############################################
 # extract current year, 1 year back,and 4 years back from to most recent year
 sub.gb.years %>% 
+  # I have added a filter so that it is in the past for running past reports (Tim) 
+  filter(year <= current.year)  %>%
   filter(income != 0) %>% 
   group_by(country) %>% 
   mutate(most.recent = max(year)) %>% 
@@ -349,7 +373,21 @@ sub.gb.ref %>%
   select(most.recent) %>% max() -> gb.mr.year
 
 # RPI calculation 
+#new FunRpi Date not Month (Still to be adjusted with Ivo's new RPI sheet)
+FunRpi <- function(current.year, n = 4) {
+  rpi %>%  mutate (Month = format(as.Date(Date), "/%m/%Y")) %>% 
+    select(Month, Cost.of.Living)%>% 
+    filter(Month %in% c(paste0("/04/", current.year - n),
+                        paste0("/04/", current.year))) %>% 
+    mutate(Cost.of.Living = Cost.of.Living + 100,
+           Month = c("start", "end"))  %>% 
+    summarise(rpi = Cost.of.Living[Month == "end"] / Cost.of.Living[Month == "start"]) %>% 
+    mutate(rpi = (rpi ^ (1/n) - 1) * 100) %>% pull(rpi) -> rpi.annual
+  rpi.annual  
+}
+
 rpi.annual.gb <- FunRpi(gb.mr.year, n = 4)
+
 
 
 
@@ -381,20 +419,12 @@ write.csv(sco.income, here::here(paste0("outputs/csv-tables/scotland-",
 
 # format table for kable
 sco.income %>% 
-  mutate(change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
-                            background = 
-                              FunDivergePalette(sco.income$change, 
-                                                c(sco.income$change, 
-                                                  sco.income$change.4),
-                                                dir = 1, factor = 1.2)[[3]]),
+                            background = "white"),
          change.4 = cell_spec(change.4, "latex",
-                            background = 
-                              FunDivergePalette(sco.income$change.4, 
-                                                c(sco.income$change, 
-                                                  sco.income$change.4),
-                                                dir = 1, factor = 1.2)[[3]])) ->
+                            background = "white")) ->
   sco.income.formatted
 
 # no income councils
@@ -482,17 +512,23 @@ write.csv(sco.pcn.numbers, here::here(paste0("outputs/csv-tables/scotland-",
                                              FunFisc(), "-table-06.csv")),
           row.names = FALSE)
 
+
 sco.pcn.numbers %>% 
   mutate(income.per.pcn = ifelse(is.na(income.per.pcn), NA, 
-                                 paste0("£", FunDec(income.per.pcn, dp.tables)))) ->
+                                 paste0('£', FunDec(income.per.pcn, dp.tables)))) ->
+                                 
   sco.pcn.numbers.formatted
+
+stringi::stri_replace_all_fixed(sco.pcn.numbers.formatted$income.per.pcn, "B#", "£")
+
+stringi::stri_replace_all_fixed(sco.pcn.numbers.formatted$income.per.pcn, "B#", "£")
 
 # get correct number of headers for the table
 x <- ncol(sco.pcn.numbers) - 3
 yearz.pcn <- paste0("\\multirow{1}{*}[0pt]{",(current.year-x):(current.year), 
                     "-", (current.year-x-1999):(current.year-1999),"}")
 
-# get average anual increase over the years in the table
+# get average annual increase over the years in the table
 sco.pcn.numbers %>% 
   filter(auth.name == "Total") %>% 
   select(-auth.name, -income.per.pcn) %>% 
@@ -537,6 +573,9 @@ data %>%
                             "Scottish DPE authorties", auth.name)) %>% 
   filter(rowSums(is.na(.[,2:5]))!=4)  -> sco.pcn.prop
 
+#Add this to remove 2nd Column from dat ato see if it works - Tim 
+sco.pcn.prop %>% select(-2)-> sco.pcn.prop
+
 # save csv table 7
 write.csv(sco.pcn.prop, here::here(paste0("outputs/csv-tables/scotland-",
                                           FunFisc(), "/scotland-", 
@@ -547,14 +586,14 @@ write.csv(sco.pcn.prop, here::here(paste0("outputs/csv-tables/scotland-",
 sco.pcn.prop %>%
   mutate_at(vars(-auth.name), 
             function(x) {cell_spec(ifelse(is.na(x), "", 
-                                          paste(FunDec(x, dp.tables), "%")), "latex", 
-                                   background = 
-                                     spec_color(log(x), 
-                                                begin = 0.3,
-                                                end = 0.9, 
-                                                option = "D",
-                                                na_color = "#FFFFFF"))}) ->
+                                          paste0(FunDec(x, dp.tables), "%")), "latex", 
+                                   background = "white")}) ->
   sco.pcn.prop.formatted
+
+#Make sure this is only 4 past years current year and LA
+if(ncol(sco.pcn.prop.formatted) > 6) {sco.pcn.prop.formatted<-sco.pcn.prop.formatted[-2]}
+if(ncol(sco.pcn.prop.formatted) > 6) {sco.pcn.prop.formatted<-sco.pcn.prop.formatted[-2]}
+if(ncol(sco.pcn.prop.formatted) > 6) {sco.pcn.prop.formatted<-sco.pcn.prop.formatted[-2]}
 
 ## EXPENDITURE #################################################################
 # get scotland totals for expenditure for each year in data,
@@ -595,21 +634,14 @@ write.csv(sco.expend, here::here(paste0("outputs/csv-tables/scotland-",
 # format cells for tabulations
 sco.expend %>% 
   mutate(prop.income = ifelse(is.na(prop.income), NA, 
-                              paste(FunDec(prop.income, dp.tables), "\\%"))) %>% 
-  mutate(change = ifelse(is.na(change), "", paste(FunDec(change, dp.tables), "%")),
-         change.4 = ifelse(is.na(change.4), "", paste(FunDec(change.4, dp.tables), "%"))) %>% 
+                              paste0(FunDec(prop.income, dp.tables), "\\%"))) %>% 
+  mutate(change = ifelse(is.na(change), "", paste0(FunDec(change, dp.tables), "%")),
+         change.4 = ifelse(is.na(change.4), "", paste0(FunDec(change.4, dp.tables), "%"))) %>% 
   mutate(change = cell_spec(change, "latex",
                             background = 
-                              FunDivergePalette(sco.expend$change,
-                                                c(sco.expend$change,
-                                                  sco.expend$change.4),dir = -1,
-                                                factor = 1)[[3]]),
+                              "white"),
          change.4 = cell_spec(change.4, "latex",
-                              background = 
-                                FunDivergePalette(sco.expend$change.4,
-                                                  c(sco.expend$change,
-                                                    sco.expend$change.4),dir = -1,
-                                                  factor = 1)[[3]])) ->
+                              background ="white")) ->
   sco.expend.formatted
 
 
@@ -711,10 +743,8 @@ write.csv(sco.expend.of.income, here::here(paste0("outputs/csv-tables/scotland-"
 sco.expend.of.income %>% 
   mutate_at(vars(-auth.name), function(x) ifelse(is.infinite(x), NA, x)) %>% 
   mutate_at(vars(-auth.name), function(x) { 
-    cell_spec(ifelse(is.na(x), "", paste(FunDec(x, dp.tables), "%")), "latex", 
-              background  = spec_color(1/x, begin = 0.3,
-                                       end = 0.9, option = "D", 
-                                       na_color = "#FFFFFF"))}) ->
+    cell_spec(ifelse(is.na(x), "", paste0(FunDec(x, dp.tables), "%")), "latex", 
+              background  = "white")}) ->
   sco.expend.of.income.formatted
 
 
@@ -784,9 +814,9 @@ write.csv(sco.surplus.totals.table, here::here(
 # format for tabulation
 sco.surplus.totals.table %>% 
   mutate(change = ifelse(is.na(change), NA, 
-                         paste(FunDec(change, dp.tables), "%")),
+                         paste0(FunDec(change, dp.tables), "%")),
          prop.transp = ifelse(is.na(prop.transp), NA, 
-                              paste(FunDec(prop.transp, dp.tables), "\\%"))) %>% 
+                              paste0(FunDec(prop.transp, dp.tables), "\\%"))) %>% 
   mutate(change =cell_spec(change, "latex", 
                            italic = ifelse(is.na(.[[7]]), FALSE,
                                            ifelse(.[[6]] < 0 , TRUE, FALSE)))) %>% 

@@ -5,6 +5,7 @@
 ################################################################################
 output:
   bookdown::pdf_document2: 
+    keep_tex: true
     toc: FALSE
 fontsize: 12pt
 header-includes:
@@ -13,6 +14,7 @@ header-includes:
   - \usepackage{multirow}
   - \usepackage{colortbl}
   - \usepackage{flafter}
+  - \usepackage{makecell}
 params:
   current.year: 2020
   dp.text: 1

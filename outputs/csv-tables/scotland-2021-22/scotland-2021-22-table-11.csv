@@ -1,0 +1,34 @@
+"auth.name","income.total","expend.total","surplus.total","income.tfs","expend.tfs","surplus.tfs","income.diff","expend.diff","surplus.diff"
+"Aberdeenshire",585,604,-19,NA,NA,NA,NA,NA,NA
+"East Lothian",789,635,154,299.728,NA,NA,489.272,NA,NA
+"Angus",83,222,-139,272.099,NA,NA,-189.099,NA,NA
+"Argyll and Bute",1060,1277,-217,451.871,NA,NA,608.129,NA,NA
+"Edinburgh City",30570,8772,21798,9020.573,NA,NA,21549.427,NA,NA
+"Clackmannanshire",19,38,-19,NA,NA,NA,NA,NA,NA
+"Dumfries and Galloway",7,221,-214,NA,NA,NA,NA,NA,NA
+"Dundee City",3044,3034,10,994.147,NA,NA,2049.853,NA,NA
+"East Ayrshire",783,145,638,167.175,NA,NA,615.825,NA,NA
+"East Dunbartonshire",671,791,-120,220.5,NA,NA,450.5,NA,NA
+"East Renfrewshire",89,297,-208,71.122,NA,NA,17.878,NA,NA
+"Fife",2857,2656,201,37.734,NA,NA,2819.266,NA,NA
+"Glasgow City",19178,13010,6168,12487.75,NA,NA,6690.25,NA,NA
+"Highland",2582,2085,497,0.944,NA,NA,2581.056,NA,NA
+"Inverclyde",235,439,-204,219.465,NA,NA,15.535,NA,NA
+"Midlothian",194,350,-156,114.539,NA,NA,79.461,NA,NA
+"Moray",644,477,167,NA,NA,NA,NA,NA,NA
+"Falkirk",496,354,142,143.802,NA,NA,352.198,NA,NA
+"Na h-Eileanan an Iar",33,97,-64,NA,NA,NA,NA,NA,NA
+"North Ayrshire",194,435,-241,NA,NA,NA,NA,NA,NA
+"North Lanarkshire",0,0,0,23.59,NA,NA,-23.59,NA,NA
+"Orkney Islands",96,210,-114,NA,NA,NA,NA,NA,NA
+"Perth and Kinross",3437,2896,541,526.874,NA,NA,2910.126,NA,NA
+"Renfrewshire",320,570,-250,39.223,NA,NA,280.777,NA,NA
+"Scottish Borders",154,400,-246,NA,NA,NA,NA,NA,NA
+"Shetland Islands",10,26,-16,NA,NA,NA,NA,NA,NA
+"South Ayrshire",979,828,151,954.078,NA,NA,24.922,NA,NA
+"South Lanarkshire",1377,1744,-367,282.054,NA,NA,1094.946,NA,NA
+"Stirling",1760,1842,-82,3.611,NA,NA,1756.389,NA,NA
+"West Dunbartonshire",0,98,-98,NA,NA,NA,NA,NA,NA
+"West Lothian",0,156,-156,NA,NA,NA,NA,NA,NA
+"Aberdeen City",6280,2682,3598,6853.531,NA,NA,-573.531,NA,NA
+"Total",78526,47391,31135,33184.41,0,0,43599.59,0,0
