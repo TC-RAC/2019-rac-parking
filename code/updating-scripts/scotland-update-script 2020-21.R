@@ -367,6 +367,11 @@ if (add.new.data){
   filter(country %in% c("GB","Scotland") | country %in% c("England","Wales") & fiscyear == max(fiscyear)) %>%
     mutate(refs = paste0("@", key)) %>%
     column_to_rownames("key") -> bib.scotland
+
+#Get original DPE report reference added
+bib.master %>%   filter(country == "Scotland", fiscyear == 2013, content == "pcn") %>% mutate(refs = paste0("@", key))%>%
+  column_to_rownames("key")-> orig.DPE.2013
+bib.scotland<-rbind(bib.scotland,orig.DPE.2013)
   
   # create bib file
   bib.scotland %>%

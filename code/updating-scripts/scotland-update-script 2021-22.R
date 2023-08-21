@@ -229,8 +229,13 @@ if (add.new.data){
                                      pages = sco.pdf.i.e.tab,
                                      output = "data.frame")[[1]]
   
+  #2021-22 this didn't work cleanly - so clearing up with this 
+  scotland.tfs.i.e<-scotland.tfs.i.e[,!names(scotland.tfs.i.e) %in% c("Expenditure","Annual")]
+  names(scotland.tfs.i.e)<-c("Local.authority","PCN.income","Other.income","Total.income","Expenditure","Annual.balance")
+  
   # clean TFS income expenditure table
   scotland.tfs.i.e <- FunScotlandTFSIE(scotland.tfs.i.e, current.year)
+  
   
   # join all 3 tables from the pdf
   scotland.pdf <- full_join(full_join(scotland.dpe,
@@ -247,7 +252,7 @@ if (add.new.data){
            surplus.total = income.total - expend.total) -> master.update
   
 #Take some extra lines out - not sure wherte they come from (Tim)
-  master.update %>% filter(!auth.name%like% "DPE") %>% filter(auth.name!="")  %>% filter(auth.name!="Dunbartonshire") %>% filter(auth.name!="Eilean Siar") -> master.update
+  master.update %>% filter(!auth.name %like% "DPE") %>% filter(auth.name!="")  %>% filter(auth.name!="Dunbartonshire") %>% filter(auth.name!="Eilean Siar") -> master.update
   
    # double check the update is OK: 
   if (nrow(master.update) != 32) {
@@ -364,6 +369,11 @@ if (add.new.data){
   filter(country %in% c("GB","Scotland") | country %in% c("England","Wales") & fiscyear == max(fiscyear)) %>%
     mutate(refs = paste0("@", key)) %>%
     column_to_rownames("key") -> bib.scotland
+
+#Get original DPE report reference added
+bib.master %>%   filter(country == "Scotland", fiscyear == 2013, content == "pcn") %>% mutate(refs = paste0("@", key))%>%
+  column_to_rownames("key")-> orig.DPE.2013
+bib.scotland<-rbind(bib.scotland,orig.DPE.2013)
   
   # create bib file
   bib.scotland %>%

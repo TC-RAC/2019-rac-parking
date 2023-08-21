@@ -1,0 +1,813 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{lscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+\usepackage{flafter}
+\usepackage{palatino}
+\renewcommand{\familydefault}{\sfdefault} % sans serif
+\fontfamily{ppl}\selectfont
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Local Authority Parking Finances in Scotland 2020-21},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Local Authority Parking Finances in Scotland 2020-21}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\renewcommand{\arraystretch}{1.2}
+
+This note covers parking finances for the 32 local authorities in Scotland. They are required to submit details of their finances to the Scottish Government annually in a standard format. The figures are normally published in March, nearly a year after the financial year end. This note looks at the section on parking income and expenditure for 2016-17 to 2020-21 and is based primarily on Scottish Local Government Finance Statistics data (Scottish Government (2022)), as well as data reported by English and Welsh Local Government authorities which is used for comparison, all of the sources of which are listed in the references\footnote{Contains public sector information licensed under the \href{http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/}{Open Government Licence v3.0}.}. \emph{N.B. Aberdeen City does not publish its data in the LGF figures and therefore data has been extracted from its annual accounts where necessary (see Aberdeen City Council (2019 and 2020))}.
+
+In addition, Transport Scotland is now publishing an annual report on decriminalised parking - the latest being: \emph{Decriminalised Parking Enforcement -- Local Authorities' Income and Expenditure:} 2020 to 2021 (Transport Scotland (2022)), which follows on from a report \emph{released} in 2016 by the Scottish Parliament Rural Economy and Connectivity Committee that showed for the first time the number of Penalty Charge Notices (PCNs) issued and penalty income raised in Scotland for the years 2013-14 to 2015-16 (Transport Scotland (2016)).
+
+The Transport Scotland report deals with the statutory returns which are required by councils operating Decriminalised Parking Enforcement (DPE) to show how the surpluses are reinvested in transport activities. The local finance figures also include non-DPE activities, primarily off-street parking.
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Table 1 shows that as of the end of 2021, 21 councils were operating DPE (using local traffic wardens and civil enforcement), while two more were actively working towards DPE. The remaining ten authorities were not currently considering DPE, but still use fixed penalty notices issued instead of fines enforced by the Justice of the Peace courts. See Figure \ref{fig:map1} for the map\footnote{Boundary data for this and all further maps is from Office for National Statistics (2017). Contains public sector information licensed under the \href{http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/}{Open Government Licence v3.0.}}.
+
+Police Scotland no longer enforces parking offences but now deals only with dangerous parking (e.g.~on pedestrian crossings) by local arrangement. Several of the authorities not using DPE have rejected it because of the cost of setting it up and running it for the small number of parking offences.
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{lll}
+\caption{\label{tab:dpe}Parking arrangements for local authorities in Scotland}\\
+\toprule
+Using DPE & Considering using DPE & Not using DPE\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:dpe}Parking arrangements for local authorities in Scotland \textit{(continued)}}\\
+\toprule
+Using DPE & Considering using DPE & Not using DPE\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Angus (2017) &  & Aberdeenshire\\
+Argyll and Bute (2014) &  & Clackmannanshire\\
+Edinburgh City (1998) &  & Dumfries and Galloway\\
+Dundee City (2004) &  & Moray\\
+East Ayrshire (2012) &  & Na h-Eileanan an Iar\\
+East Dunbartonshire (2014) &  & North Ayrshire\\
+East Lothian (2017) &  & Orkney Islands\\
+East Renfrewshire (2013) &  & Scottish Borders\\
+Falkirk (2018) &  & Shetland Islands\\
+Fife (2013) &  & West Dunbartonshire\\
+Glasgow City (1999) &  & West Lothian\\
+Highland (2016) &  & \\
+Inverclyde (2014) &  & \\
+Midlothian (2018) &  & \\
+North Lanarkshire (2017) &  & \\
+Perth and Kinross (2002) &  & \\
+Renfrewshire (2010) &  & \\
+South Ayrshire (2012) &  & \\
+South Lanarkshire (2005) &  & \\
+Stirling (2017) &  & \\
+Aberdeen City (2003) &  & \\*
+\end{longtable}
+\endgroup{}
+
+
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/TIM.CHATTERTON/OneDrive - The Royal Automobile Club Ltd/R Projects/2022-rac-parking/outputs/reports/scotland-report-2020-21_files/figure-latex/map1-1.pdf}
+\caption{\label{fig:map1}Map showing implementation of decriminalised parking in Scotland (Boundary data for this map is from Office for National Statistics (2017))}
+\end{figure}
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+Table \ref{tab:sumtab} and Figure \ref{fig:fig1} show the summary accounts for local authorities in Scotland for fiscal years 2016-17 to 2020-21. The income has
+fallen by 54.0\%, the expenditure has
+stayed approximately the same, and the surplus has
+fallen by 103.9\%
+compared to the previous fiscal year. Total transport expenditures have
+stayed approximately the same and the surplus now represents -0.4\% of net transport expenditure. Parking makes a
+NA contribution to overall transport expenditure in Scotland compared with England where it is NaN\% of total transport.
+
+\newpage
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{>{\raggedleft\arraybackslash}p{3cm}>{\raggedleft\arraybackslash}p{3cm}rrrrrr}
+\caption{\label{tab:sumtab}Summary of parking accounts for Scotland (£ millions)}\\
+\toprule
+ &  & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change\\2020-21\\on\\2019-20}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:sumtab}Summary of parking accounts for Scotland (£ millions) \textit{(continued)}}\\
+\toprule
+ &  & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change\\2020-21\\on\\2019-20}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+ & Income & 82.6 & 88.2 & 88.6 & 92.8 & 42.7 & -54.0\%\\
+\nopagebreak
+ & Expenditure & 40.0 & 43.6 & 41.6 & 43.5 & 44.7 & 2.6\%\\
+\nopagebreak
+\multirow{-3}{*}{\raggedleft\arraybackslash Parking} & Surplus & 42.6 & 44.6 & 47.0 & 49.3 & -1.9 & -103.9\%\\
+\cmidrule{1-8}\pagebreak[0]
+Total transport & Net expenditure & 412.9 & 426.7 & 375.3 & 366.0 & 456.0 & 24.6\%\\
+\cmidrule{1-8}\pagebreak[0]
+ & Parking surplus as percentage of net transport expenditure & 10.3 & 10.4 & 12.5 & 13.5 & -0.4 & \\*
+\end{longtable}
+\endgroup{}
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/TIM.CHATTERTON/OneDrive - The Royal Automobile Club Ltd/R Projects/2022-rac-parking/outputs/reports/scotland-report-2020-21_files/figure-latex/fig1-1.pdf}
+\caption{\label{fig:fig1}Parking revenues--Scotland}
+\end{figure}
+
+Since 2016-17 income has fallen by
+-48.2\% and expenditure has risen by 11.7\%. Over the same period the surplus has fallen by -104.5\%. Figure \ref{fig:fig1} gives a longer term overview of the trends in incomes, expenditures and surpluses.
+
+\newpage
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{rrrrrr}
+\caption{\label{tab:compare}Comparison of parking income and expenditure in across the nations of Great Britain (£ millions, latest year available)}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:compare}Comparison of parking income and expenditure in across the nations of Great Britain (£ millions, latest year available) \textit{(continued)}}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Fiscal year & (2018-19) & (2018-19) & (2020-21) & (2020-21) & (2019-20)\\
+\midrule
+Parking income & 1021.3 & 728.0 & 42.7 & 17.0 & 135.8\\
+Parking expenditure & 539.6 & 273.5 & 44.7 & 26.3 & 28.1\\
+Surplus & 481.7 & 454.4 & -1.9 & -9.2 & 107.7\\
+\midrule
+Surplus as proportion of income & 47.2\% & 62.4\% & -4.5\% & -54.1\% & 79.3\%\\*
+\end{longtable}
+\endgroup{}
+
+Table \ref{tab:compare} provides a comparison with London, England excluding London, and Wales for the most recent available data, while Table \ref{tab:change} compares the changes between 2020-21 and the previous year, with the average annual change over the four-year period starting in 2016-17 (or the most recent four-year period for which data is available). In the last year the surpluses for Scotland have decreased by -103.9\%, which is NA than the average annual increase observed over the preceding four years, which was NA\%.
+
+On average, parking surpluses in Great Britain have decreased by about 89.7\% annually over the four years compared with 2.8\% annually for the Retail Prices Index during the same period (Office for National Statistics (2023)).\footnote{The most recent data available for Great Britain as a whole is from the year 2019-20 and all calculations are therefore performed for the four years previous i.e.~from 2015-16.}
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{rrrrrr}
+\caption{\label{tab:change}Changes in parking income and expenditure over previous four years (from most recent year available) across the nations of Great Britain}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:change}Changes in parking income and expenditure over previous four years (from most recent year available) across the nations of Great Britain \textit{(continued)}}\\
+\toprule
+ & \makecell[c]{England\\without\\London} & London & Scotland & Wales & \makecell[c]{Great\\Britain}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Most recent year available & (2018-19) & (2018-19) & (2020-21) & (2020-21) & (2019-20)\\
+\midrule
+Average annual change in income & 4.3 \% & 5.8 \% & -15.2 \% & -17.9 \% & -46.1 \%\\
+Change in income since previous year & 4.2 \% & 7.1 \% & -54.0 \% & -60.4 \% & -92.8 \%\\
+\midrule
+Average annual change in expenditure & 2.8 \% & 0.0 \% & 2.8 \% & 2.9 \% & -56.8 \%\\
+Change in expenditure since previous year & 5.1 \% & -0.1 \% & 2.6 \% & -270.4 \% & -96.6 \%\\
+\midrule
+Average annual change in surplus & 6.1 \% & 10.2 \% & NaN \% & NaN \% & -39.5 \%\\
+Change in surplus since previous year & 3.1 \% & 11.9 \% & -103.9 \% & -115.8 \% & -89.7 \%\\*
+\end{longtable}
+\endgroup{}
+
+\newpage
+
+\hypertarget{income}{%
+\section{Income}\label{income}}
+
+Total council parking income from all sources in Scotland for 2020-21 was £42.7 million, 54.0\% lower than 2019-20. Note that this includes meter and penalty income for on- and off-street parking, but does not include income received by private parking companies. Table \ref{tab:incometab} ranks the Scottish councils in terms of parking income.
+
+In Scotland as a whole One council increased their income over the past year and 28 decreased their income. Another three councils' incomes stayed the same.
+The changes from 2019-20 are mapped in Figure \ref{fig:incomefig}. The annualised changes over the previous four years are plotted in Figure \ref{fig:incomefig4}, using the same colour palette.
+
+The top three Scottish cities by income were Edinburgh City, Glasgow City, and Aberdeen City, and between them accounted for 73.5\% of parking income.
+
+The three councils which had the largest year-on-year percentage increases in income were East Lothian (up 26.1\%), South Ayrshire (up -34.6\%) and Midlothian (up -35.4\%).
+North Lanarkshire, West Dunbartonshire, and West Lothian showed a larger percentage change but parking income was under £30,000. The biggest decreases were in Aberdeenshire (90.3\%), and Moray (88.5 \%) (excluding East Renfrewshire, and Dumfries and Galloway where income was under £30,000).
+
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{rrrrrrrr}
+\caption{\label{tab:incometab}Parking income for Scotland (£,000)}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change\\2020-21\\on\\2019-20} & \makecell[c]{Average\\annual\\change\\since\\2016-17}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:incometab}Parking income for Scotland (£,000) \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change\\2020-21\\on\\2019-20} & \makecell[c]{Average\\annual\\change\\since\\2016-17}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Edinburgh City & 30,234 & 32,556 & 32,481 & 33,541 & 20,102 & \cellcolor{white}{ -40.1\%} & \cellcolor{white}{  -9.7\%}\\
+Glasgow City & 20,203 & 20,086 & 19,291 & 21,438 & 7,580 & \cellcolor{white}{ -64.6\%} & \cellcolor{white}{ -21.7\%}\\
+Aberdeen City & 8,040 & 8,397 & 7,869 & 8,154 & 3,717 & \cellcolor{white}{ -54.4\%} & \cellcolor{white}{ -17.5\%}\\
+Dundee City & 3,751 & 5,094 & 5,140 & 5,252 & 1,743 & \cellcolor{white}{ -66.8\%} & \cellcolor{white}{ -17.4\%}\\
+Fife & 3,467 & 3,579 & 3,814 & 4,000 & 1,664 & \cellcolor{white}{ -58.4\%} & \cellcolor{white}{ -16.8\%}\\
+Perth and Kinross & 2,905 & 3,225 & 3,546 & 3,555 & 1,465 & \cellcolor{white}{ -58.8\%} & \cellcolor{white}{ -15.7\%}\\
+Highland & 1,815 & 2,251 & 2,552 & 2,680 & 1,454 & \cellcolor{white}{ -45.7\%} & \cellcolor{white}{  -5.4\%}\\
+Stirling & 1,620 & 2,218 & 2,040 & 2,161 & 839 & \cellcolor{white}{ -61.2\%} & \cellcolor{white}{ -15.2\%}\\
+East Lothian & 84 & 458 & 482 & 501 & 632 & \cellcolor{white}{  26.1\%} & \cellcolor{white}{  65.6\%}\\
+Argyll and Bute & 1,089 & 1,052 & 1,191 & 1,202 & 618 & \cellcolor{white}{ -48.6\%} & \cellcolor{white}{ -13.2\%}\\
+East Ayrshire & 1,790 & 2,084 & 1,358 & 1,400 & 515 & \cellcolor{white}{ -63.2\%} & \cellcolor{white}{ -26.8\%}\\
+South Ayrshire & 1,187 & 886 & 1,009 & 736 & 481 & \cellcolor{white}{ -34.6\%} & \cellcolor{white}{ -20.2\%}\\
+South Lanarkshire & 2,352 & 2,275 & 2,301 & 2,327 & 378 & \cellcolor{white}{ -83.8\%} & \cellcolor{white}{ -36.7\%}\\
+Falkirk & 462 & 411 & 529 & 772 & 299 & \cellcolor{white}{ -61.3\%} & \cellcolor{white}{ -10.3\%}\\
+East Dunbartonshire & 184 & 323 & 617 & 579 & 246 & \cellcolor{white}{ -57.5\%} & \cellcolor{white}{   7.5\%}\\
+Renfrewshire & 1,052 & 1,021 & 1,080 & 891 & 223 & \cellcolor{white}{ -75.0\%} & \cellcolor{white}{ -32.1\%}\\
+Midlothian & 0 & 0 & 194 & 271 & 175 & \cellcolor{white}{ -35.4\%} & \cellcolor{white}{}\\
+Moray & 690 & 676 & 873 & 877 & 101 & \cellcolor{white}{ -88.5\%} & \cellcolor{white}{ -38.1\%}\\
+North Ayrshire & 195 & 185 & 195 & 186 & 94 & \cellcolor{white}{ -49.5\%} & \cellcolor{white}{ -16.7\%}\\
+Angus & 6 & 0 & 351 & 593 & 80 & \cellcolor{white}{ -86.5\%} & \cellcolor{white}{  91.1\%}\\
+Inverclyde & 385 & 396 & 507 & 472 & 80 & \cellcolor{white}{ -83.1\%} & \cellcolor{white}{ -32.5\%}\\
+Orkney Islands & 110 & 149 & 150 & 158 & 69 & \cellcolor{white}{ -56.3\%} & \cellcolor{white}{ -11.0\%}\\
+Scottish Borders & 174 & 165 & 186 & 177 & 67 & \cellcolor{white}{ -62.1\%} & \cellcolor{white}{ -21.2\%}\\
+Aberdeenshire & 488 & 443 & 466 & 544 & 53 & \cellcolor{white}{ -90.3\%} & \cellcolor{white}{ -42.6\%}\\
+Na h-Eileanan an Iar & 36 & 47 & 74 & 71 & 20 & \cellcolor{white}{ -71.8\%} & \cellcolor{white}{ -13.7\%}\\
+Clackmannanshire & 0 & 0 & 33 & 38 & 18 & \cellcolor{white}{ -52.6\%} & \cellcolor{white}{}\\
+East Renfrewshire & 216 & 193 & 201 & 154 & 16 & \cellcolor{white}{ -89.6\%} & \cellcolor{white}{ -47.8\%}\\
+Shetland Islands & 27 & 28 & 13 & 91 & 13 & \cellcolor{white}{ -85.7\%} & \cellcolor{white}{ -16.7\%}\\
+Dumfries and Galloway & 15 & 17 & 11 & 8 & 0 & \cellcolor{white}{-100.0\%} & \cellcolor{white}{-100.0\%}\\
+North Lanarkshire & 0 & 0 & 0 & 0 & 0 & \cellcolor{white}{   0.0\%} & \cellcolor{white}{   0.0\%}\\
+West Dunbartonshire & 0 & 0 & 0 & 0 & 0 & \cellcolor{white}{   0.0\%} & \cellcolor{white}{   0.0\%}\\
+West Lothian & 0 & 0 & 0 & 0 & 0 & \cellcolor{white}{   0.0\%} & \cellcolor{white}{   0.0\%}\\
+\midrule
+Total & 82,577 & 88,215 & 88,554 & 92,829 & 42,742 & \cellcolor{white}{ -54.0\%} & \cellcolor{white}{ -15.2\%}\\*
+\end{longtable}
+\endgroup{}
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/TIM.CHATTERTON/OneDrive - The Royal Automobile Club Ltd/R Projects/2022-rac-parking/outputs/reports/scotland-report-2020-21_files/figure-latex/incomefig-1.pdf}
+\caption{\label{fig:incomefig}Map of change in parking income from 2019-20 to 2020-21 (Boundary data for this map is from Office for National Statistics (2017))}
+\end{figure}
+
+Table \ref{tab:pcntab} shows the number of PCNs issued council by council in Scotland for the years 2016-17 to 2020-21, with the average income per PCN for 2020-21. The total number of PCNs has decreased by around 12.5\% a year on average. The average recovery per PCN was £30.8 in 2020-21.
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/TIM.CHATTERTON/OneDrive - The Royal Automobile Club Ltd/R Projects/2022-rac-parking/outputs/reports/scotland-report-2020-21_files/figure-latex/incomefig4-1.pdf}
+\caption{\label{fig:incomefig4}Map of average annual change in parking income over the past four years from 2016-17 to 2020-21 (Boundary data for this map is from Office for National Statistics (2017))}
+\end{figure}
+
+\newpage
+
+\pagebreak
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{rrrrrrr}
+\caption{\label{tab:pcntab}Number of PCNs for councils using DPE and average 2020-21 income per PCN}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{£/PCN\\(2020-21)}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:pcntab}Number of PCNs for councils using DPE and average 2020-21 income per PCN \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{£/PCN\\(2020-21)}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Aberdeen City & 37,754 & 40,392 & 38,967 & 36,842 & 35,295 & £ 33.7\\
+Angus &  & 6,273 & 6,626 & 8,217 & 2,404 & £ 26.4\\
+Argyll and Bute & 13,018 & 6,269 & 6,696 & 5,775 & 4,401 & £ 28.8\\
+Dundee City & 29,266 & 21,837 & 29,130 & 31,949 & 18,680 & £ 28.3\\
+East Ayrshire & 5,995 & 6,262 & 6,900 & 6,097 & 2,550 & £ 38.2\\
+East Dunbartonshire & 4,704 & 5,301 & 6,348 & 6,137 & 4,900 & £ 31.7\\
+East Lothian & 953 & 10,040 & 9,540 & 10,063 & 10,154 & £ 24.2\\
+East Renfrewshire & 3,742 & 5,176 & 4,859 & 3,614 & 77 & £159.5\\
+Edinburgh City & 192,381 & 191,563 & 183,965 & 191,479 & 98,721 & £ 29.2\\
+Falkirk &  &  & 2,881 & 7,689 & 2,741 & £ 18.4\\
+Fife & 20,142 & 21,890 & 21,768 & 19,864 & 7,294 & £ 33.4\\
+Glasgow City & 133,901 & 125,505 & 146,412 & 152,579 & 65,686 & £ 30.3\\
+Highland & 4,101 & 9,477 & 10,000 & 10,386 & 8,070 & £ 31.2\\
+Inverclyde & 7,200 & 8,059 & 9,117 & 8,635 & 1,017 & £ 56.3\\
+Midlothian &  &  & 6,855 & 6,939 & 4,696 & £ 27.2\\
+North Lanarkshire &  &  & 6,018 & 11,863 & 2,707 & £ 39.9\\
+Perth and Kinross & 7,805 & 14,469 & 15,852 & 13,401 & 5,872 & £ 44.1\\
+Renfrewshire & 6,160 & 6,823 & 6,974 & 5,191 & 2,470 & £ 14.8\\
+South Ayrshire & 5,238 & 5,824 & 7,213 & 8,991 & 3,025 & £ 37.9\\
+South Lanarkshire & 23,693 & 20,952 & 21,281 & 22,320 & 5,065 & £ 50.1\\
+Stirling &  & 9,975 & 9,586 & 12,189 & 4,551 & £ 34.1\\
+\midrule
+Total & 496,053 & 516,087 & 556,988 & 580,220 & 290,376 & £ 30.8\\*
+\end{longtable}
+\endgroup{}
+\newpage
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{rrrrrr}
+\caption{\label{tab:pcnprop}Proportion of parking income from PCNs in Scottish councils using DPE with London, and England excluding London, for comparison}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:pcnprop}Proportion of parking income from PCNs in Scottish councils using DPE with London, and England excluding London, for comparison \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Aberdeen City & \cellcolor{white}{20.1\%} & \cellcolor{white}{20.7\%} & \cellcolor{white}{17.6\%} & \cellcolor{white}{16.1\%} & \cellcolor{white}{32.0\%}\\
+Argyll and Bute & \cellcolor{white}{38.3\%} & \cellcolor{white}{17.8\%} & \cellcolor{white}{17.7\%} & \cellcolor{white}{14.8\%} & \cellcolor{white}{20.5\%}\\
+Dundee City & \cellcolor{white}{27.0\%} & \cellcolor{white}{24.9\%} & \cellcolor{white}{17.1\%} & \cellcolor{white}{20.2\%} & \cellcolor{white}{30.3\%}\\
+East Ayrshire & \cellcolor{white}{13.8\%} & \cellcolor{white}{10.4\%} & \cellcolor{white}{21.1\%} & \cellcolor{white}{18.5\%} & \cellcolor{white}{18.9\%}\\
+East Dunbartonshire & \cellcolor{white}{77.9\%} & \cellcolor{white}{53.1\%} & \cellcolor{white}{35.0\%} & \cellcolor{white}{35.3\%} & \cellcolor{white}{63.2\%}\\
+East Lothian & \cellcolor{white}{33.5\%} & \cellcolor{white}{60.9\%} & \cellcolor{white}{65.5\%} & \cellcolor{white}{63.1\%} & \cellcolor{white}{38.8\%}\\
+East Renfrewshire & \cellcolor{white}{97.9\%} & \cellcolor{white}{98.7\%} & \cellcolor{white}{93.0\%} & \cellcolor{white}{86.5\%} & \cellcolor{white}{76.8\%}\\
+Edinburgh City & \cellcolor{white}{18.6\%} & \cellcolor{white}{18.1\%} & \cellcolor{white}{16.3\%} & \cellcolor{white}{17.6\%} & \cellcolor{white}{14.3\%}\\
+Fife & \cellcolor{white}{17.7\%} & \cellcolor{white}{16.4\%} & \cellcolor{white}{15.9\%} & \cellcolor{white}{13.1\%} & \cellcolor{white}{14.6\%}\\
+Glasgow City & \cellcolor{white}{23.8\%} & \cellcolor{white}{22.0\%} & \cellcolor{white}{26.0\%} & \cellcolor{white}{25.6\%} & \cellcolor{white}{26.3\%}\\
+Highland & \cellcolor{white}{ 3.9\%} & \cellcolor{white}{11.8\%} & \cellcolor{white}{12.0\%} & \cellcolor{white}{11.4\%} & \cellcolor{white}{17.3\%}\\
+Inverclyde & \cellcolor{white}{81.5\%} & \cellcolor{white}{70.5\%} & \cellcolor{white}{81.3\%} & \cellcolor{white}{78.3\%} & \cellcolor{white}{71.6\%}\\
+Perth and Kinross & \cellcolor{white}{10.8\%} & \cellcolor{white}{16.0\%} & \cellcolor{white}{16.6\%} & \cellcolor{white}{14.8\%} & \cellcolor{white}{17.7\%}\\
+Renfrewshire & \cellcolor{white}{15.5\%} & \cellcolor{white}{17.6\%} & \cellcolor{white}{15.2\%} & \cellcolor{white}{14.7\%} & \cellcolor{white}{16.4\%}\\
+South Ayrshire & \cellcolor{white}{16.7\%} & \cellcolor{white}{21.8\%} & \cellcolor{white}{22.3\%} & \cellcolor{white}{40.4\%} & \cellcolor{white}{23.9\%}\\
+South Lanarkshire & \cellcolor{white}{32.1\%} & \cellcolor{white}{30.7\%} & \cellcolor{white}{31.5\%} & \cellcolor{white}{32.2\%} & \cellcolor{white}{67.2\%}\\
+Scottish DPE authorties & \cellcolor{white}{20.0\%} & \cellcolor{white}{20.0\%} & \cellcolor{white}{20.0\%} & \cellcolor{white}{20.6\%} & \cellcolor{white}{20.9\%}\\
+London & \cellcolor{white}{42.0\%} & \cellcolor{white}{43.1\%} & \cellcolor{white}{45.1\%} & \cellcolor{white}{} & \cellcolor{white}{}\\
+England without London & \cellcolor{white}{12.8\%} & \cellcolor{white}{13.8\%} & \cellcolor{white}{12.3\%} & \cellcolor{white}{} & \cellcolor{white}{}\\*
+\end{longtable}
+\endgroup{}
+
+Scottish councils with DPE earn 32.0\% of their income from PCNs (see Table \ref{tab:pcnprop}).
+
+\hypertarget{expenditure}{%
+\section{Expenditure}\label{expenditure}}
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/TIM.CHATTERTON/OneDrive - The Royal Automobile Club Ltd/R Projects/2022-rac-parking/outputs/reports/scotland-report-2020-21_files/figure-latex/expendfig-1.pdf}
+\caption{\label{fig:expendfig}Map of change in parking expenditure from 2019-20 to 2020-21 (Boundary data for this map is from Office for National Statistics (2017))}
+\end{figure}
+
+Table \ref{tab:expendtab} ranks the councils in terms of expenditure on parking.
+
+Overall expenditure has risen by £1.1 million (2.6\%) after a rise of £2.0 million last year.
+
+In Scotland as a whole Nine councils increased their expenditures over the past year and 22 decreased them. Another single council's expenditure stayed the same. The changes from 2019-20 are mapped in Figure \ref{fig:expendfig}. The average annual changes over the previous four years are plotted in Figure \ref{fig:expendfig4}, using the same colour palette.
+
+The largest increase in expenditure occured in Glasgow City where it increased by 72.7\%
+while South Ayrshire and East Dunbartonshire increased by 31.6\% and 17.4\% respectively. The biggest decreases were in East Renfrewshire (51.2\%), and East Ayrshire (44.8 \%) (excluding Shetland Islands with expenditure under £30,000).
+
+The table also shows the proportion of income taken up by costs in 2020-21. Nationally in Scotland it is 104.5\% with Glasgow at 34.5\% and Edinburgh at 188.0\%.
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{longtable}[t]{rrrrrrrrr}
+\caption{\label{tab:expendtab}Parking expenditure for Scotland (£,000)}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change\\2020-21\\on\\2019-20} & \makecell[c]{Average\\annual\\change\\since\\2016-17} & \makecell[c]{Expenditure\\as\\proportion\\of income}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:expendtab}Parking expenditure for Scotland (£,000) \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change\\2020-21\\on\\2019-20} & \makecell[c]{Average\\annual\\change\\since\\2016-17} & \makecell[c]{Expenditure\\as\\proportion\\of income}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\endlastfoot
+Glasgow City & 6,952 & 7,544 & 6,490 & 8,254 & 14,253 & \cellcolor{white}{ 72.7\%} & \cellcolor{white}{ 19.7\%} & 188.0\%\\
+Edinburgh City & 8,365 & 8,737 & 8,399 & 8,769 & 6,943 & \cellcolor{white}{-20.8\%} & \cellcolor{white}{ -4.6\%} & 34.5\%\\
+Fife & 3,013 & 3,204 & 3,306 & 3,272 & 2,829 & \cellcolor{white}{-13.5\%} & \cellcolor{white}{ -1.6\%} & 170.0\%\\
+Aberdeen City & 4,821 & 5,075 & 4,981 & 4,077 & 2,814 & \cellcolor{white}{-31.0\%} & \cellcolor{white}{-12.6\%} & 75.7\%\\
+Perth and Kinross & 2,395 & 2,499 & 2,668 & 2,847 & 2,748 & \cellcolor{white}{ -3.5\%} & \cellcolor{white}{  3.5\%} & 187.6\%\\
+Dundee City & 2,848 & 3,401 & 3,018 & 2,828 & 2,710 & \cellcolor{white}{ -4.2\%} & \cellcolor{white}{ -1.2\%} & 155.5\%\\
+Stirling & 1,546 & 1,693 & 1,661 & 1,752 & 1,705 & \cellcolor{white}{ -2.7\%} & \cellcolor{white}{  2.5\%} & 203.2\%\\
+Highland & 1,334 & 1,607 & 1,422 & 1,588 & 1,646 & \cellcolor{white}{  3.7\%} & \cellcolor{white}{  5.4\%} & 113.2\%\\
+South Lanarkshire & 1,696 & 1,502 & 1,560 & 1,646 & 1,480 & \cellcolor{white}{-10.1\%} & \cellcolor{white}{ -3.3\%} & 391.5\%\\
+Argyll and Bute & 726 & 705 & 834 & 769 & 888 & \cellcolor{white}{ 15.5\%} & \cellcolor{white}{  5.2\%} & 143.7\%\\
+Aberdeenshire & 589 & 625 & 645 & 673 & 598 & \cellcolor{white}{-11.1\%} & \cellcolor{white}{  0.4\%} & 1128.3\%\\
+East Ayrshire & 955 & 1,698 & 977 & 1,029 & 568 & \cellcolor{white}{-44.8\%} & \cellcolor{white}{-12.2\%} & 110.3\%\\
+South Ayrshire & 706 & 579 & 505 & 427 & 562 & \cellcolor{white}{ 31.6\%} & \cellcolor{white}{ -5.5\%} & 116.8\%\\
+East Lothian & 170 & 463 & 483 & 480 & 535 & \cellcolor{white}{ 11.5\%} & \cellcolor{white}{ 33.2\%} & 84.7\%\\
+East Dunbartonshire & 341 & 513 & 535 & 403 & 473 & \cellcolor{white}{ 17.4\%} & \cellcolor{white}{  8.5\%} & 192.3\%\\
+Moray & 362 & 434 & 350 & 474 & 457 & \cellcolor{white}{ -3.6\%} & \cellcolor{white}{  6.0\%} & 452.5\%\\
+Falkirk & 320 & 275 & 324 & 430 & 452 & \cellcolor{white}{  5.1\%} & \cellcolor{white}{  9.0\%} & 151.2\%\\
+Renfrewshire & 289 & 424 & 576 & 447 & 409 & \cellcolor{white}{ -8.5\%} & \cellcolor{white}{  9.1\%} & 183.4\%\\
+Scottish Borders & 390 & 387 & 333 & 595 & 405 & \cellcolor{white}{-31.9\%} & \cellcolor{white}{  0.9\%} & 604.5\%\\
+North Ayrshire & 336 & 437 & 399 & 443 & 359 & \cellcolor{white}{-19.0\%} & \cellcolor{white}{  1.7\%} & 381.9\%\\
+Inverclyde & 346 & 397 & 463 & 449 & 341 & \cellcolor{white}{-24.1\%} & \cellcolor{white}{ -0.4\%} & 426.2\%\\
+Midlothian & 229 & 211 & 358 & 375 & 331 & \cellcolor{white}{-11.7\%} & \cellcolor{white}{  9.6\%} & 189.1\%\\
+Dumfries and Galloway & 210 & 213 & 200 & 200 & 211 & \cellcolor{white}{  5.5\%} & \cellcolor{white}{  0.1\%} & \\
+East Renfrewshire & 345 & 336 & 365 & 412 & 201 & \cellcolor{white}{-51.2\%} & \cellcolor{white}{-12.6\%} & 1256.2\%\\
+West Lothian & 149 & 144 & 173 & 175 & 169 & \cellcolor{white}{ -3.4\%} & \cellcolor{white}{  3.2\%} & \\
+Orkney Islands & 134 & 134 & 136 & 142 & 158 & \cellcolor{white}{ 11.3\%} & \cellcolor{white}{  4.2\%} & 229.0\%\\
+Angus & 190 & 159 & 139 & 210 & 152 & \cellcolor{white}{-27.6\%} & \cellcolor{white}{ -5.4\%} & 190.0\%\\
+Na h-Eileanan an Iar & 102 & 130 & 115 & 118 & 115 & \cellcolor{white}{ -2.5\%} & \cellcolor{white}{  3.0\%} & 575.0\%\\
+West Dunbartonshire & 77 & 98 & 91 & 104 & 91 & \cellcolor{white}{-12.5\%} & \cellcolor{white}{  4.3\%} & \\
+Clackmannanshire & 0 & 0 & 43 & 56 & 39 & \cellcolor{white}{-30.4\%} & \cellcolor{white}{} & 216.7\%\\
+Shetland Islands & 36 & 24 & 33 & 97 & 25 & \cellcolor{white}{-74.2\%} & \cellcolor{white}{ -8.7\%} & 192.3\%\\
+North Lanarkshire & 0 & 0 & 0 & 0 & 0 & \cellcolor{white}{  0.0\%} & \cellcolor{white}{  0.0\%} & 100.0\%\\
+\midrule
+Total & 39,972 & 43,648 & 41,582 & 43,541 & 44,667 & \cellcolor{white}{  2.6\%} & \cellcolor{white}{  2.8\%} & 104.5\%\\*
+\end{longtable}
+\endgroup{}
+
+\begin{figure}
+\centering
+\includegraphics{C:/Users/TIM.CHATTERTON/OneDrive - The Royal Automobile Club Ltd/R Projects/2022-rac-parking/outputs/reports/scotland-report-2020-21_files/figure-latex/expendfig4-1.pdf}
+\caption{\label{fig:expendfig4}Map of average annual change in parking expenditure over the past four years from 2016-17 to 2020-21 (Boundary data for this map is from Office for National Statistics (2017))}
+\end{figure}
+
+Table \ref{tab:expendprop} shows the proportion of income taken up by expenditure over the previous four years. Across Scotland it was 104.5\% compared to 46.9\% in the previous year.
+
+Edinburgh's expenditure was 34.5\% having risen since last year, and Glasgow's has risen to 188.0\%. Care should be taken in interpreting the percentages towards the bottom of the table, as the very low parking incomes can lead to extreme values which are less meaningful.
+
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{rrrrrr}
+\caption{\label{tab:expendprop}Parking expenditure as proportion of parking income}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:expendprop}Parking expenditure as proportion of parking income \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\multicolumn{6}{l}{\rule{0pt}{1em}\textsuperscript{*} Empty cells indicate the council reported no income and/or no expenditure}\\
+\endlastfoot
+Glasgow City & \cellcolor{white}{  34.4\%} & \cellcolor{white}{  37.6\%} & \cellcolor{white}{  33.6\%} & \cellcolor{white}{  38.5\%} & \cellcolor{white}{ 188.0\%}\\
+Edinburgh City & \cellcolor{white}{  27.7\%} & \cellcolor{white}{  26.8\%} & \cellcolor{white}{  25.9\%} & \cellcolor{white}{  26.1\%} & \cellcolor{white}{  34.5\%}\\
+Fife & \cellcolor{white}{  86.9\%} & \cellcolor{white}{  89.5\%} & \cellcolor{white}{  86.7\%} & \cellcolor{white}{  81.8\%} & \cellcolor{white}{ 170.0\%}\\
+Aberdeen City & \cellcolor{white}{  60.0\%} & \cellcolor{white}{  60.4\%} & \cellcolor{white}{  63.3\%} & \cellcolor{white}{  50.0\%} & \cellcolor{white}{  75.7\%}\\
+Perth and Kinross & \cellcolor{white}{  82.4\%} & \cellcolor{white}{  77.5\%} & \cellcolor{white}{  75.2\%} & \cellcolor{white}{  80.1\%} & \cellcolor{white}{ 187.6\%}\\
+Dundee City & \cellcolor{white}{  75.9\%} & \cellcolor{white}{  66.8\%} & \cellcolor{white}{  58.7\%} & \cellcolor{white}{  53.8\%} & \cellcolor{white}{ 155.5\%}\\
+Stirling & \cellcolor{white}{  95.4\%} & \cellcolor{white}{  76.3\%} & \cellcolor{white}{  81.4\%} & \cellcolor{white}{  81.1\%} & \cellcolor{white}{ 203.2\%}\\
+Highland & \cellcolor{white}{  73.5\%} & \cellcolor{white}{  71.4\%} & \cellcolor{white}{  55.7\%} & \cellcolor{white}{  59.3\%} & \cellcolor{white}{ 113.2\%}\\
+South Lanarkshire & \cellcolor{white}{  72.1\%} & \cellcolor{white}{  66.0\%} & \cellcolor{white}{  67.8\%} & \cellcolor{white}{  70.7\%} & \cellcolor{white}{ 391.5\%}\\
+Argyll and Bute & \cellcolor{white}{  66.7\%} & \cellcolor{white}{  67.0\%} & \cellcolor{white}{  70.0\%} & \cellcolor{white}{  64.0\%} & \cellcolor{white}{ 143.7\%}\\
+Aberdeenshire & \cellcolor{white}{ 120.7\%} & \cellcolor{white}{ 141.1\%} & \cellcolor{white}{ 138.4\%} & \cellcolor{white}{ 123.7\%} & \cellcolor{white}{1128.3\%}\\
+East Ayrshire & \cellcolor{white}{  53.4\%} & \cellcolor{white}{  81.5\%} & \cellcolor{white}{  71.9\%} & \cellcolor{white}{  73.5\%} & \cellcolor{white}{ 110.3\%}\\
+South Ayrshire & \cellcolor{white}{  59.5\%} & \cellcolor{white}{  65.3\%} & \cellcolor{white}{  50.0\%} & \cellcolor{white}{  58.0\%} & \cellcolor{white}{ 116.8\%}\\
+East Lothian & \cellcolor{white}{ 202.4\%} & \cellcolor{white}{ 101.1\%} & \cellcolor{white}{ 100.2\%} & \cellcolor{white}{  95.8\%} & \cellcolor{white}{  84.7\%}\\
+East Dunbartonshire & \cellcolor{white}{ 185.3\%} & \cellcolor{white}{ 158.8\%} & \cellcolor{white}{  86.7\%} & \cellcolor{white}{  69.6\%} & \cellcolor{white}{ 192.3\%}\\
+Moray & \cellcolor{white}{  52.5\%} & \cellcolor{white}{  64.2\%} & \cellcolor{white}{  40.1\%} & \cellcolor{white}{  54.0\%} & \cellcolor{white}{ 452.5\%}\\
+Falkirk & \cellcolor{white}{  69.3\%} & \cellcolor{white}{  66.9\%} & \cellcolor{white}{  61.2\%} & \cellcolor{white}{  55.7\%} & \cellcolor{white}{ 151.2\%}\\
+Renfrewshire & \cellcolor{white}{  27.5\%} & \cellcolor{white}{  41.5\%} & \cellcolor{white}{  53.3\%} & \cellcolor{white}{  50.2\%} & \cellcolor{white}{ 183.4\%}\\
+Scottish Borders & \cellcolor{white}{ 224.1\%} & \cellcolor{white}{ 234.5\%} & \cellcolor{white}{ 179.0\%} & \cellcolor{white}{ 336.2\%} & \cellcolor{white}{ 604.5\%}\\
+North Ayrshire & \cellcolor{white}{ 172.3\%} & \cellcolor{white}{ 236.2\%} & \cellcolor{white}{ 204.6\%} & \cellcolor{white}{ 238.2\%} & \cellcolor{white}{ 381.9\%}\\
+Inverclyde & \cellcolor{white}{  89.9\%} & \cellcolor{white}{ 100.3\%} & \cellcolor{white}{  91.3\%} & \cellcolor{white}{  95.1\%} & \cellcolor{white}{ 426.2\%}\\
+Midlothian & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{ 184.5\%} & \cellcolor{white}{ 138.4\%} & \cellcolor{white}{ 189.1\%}\\
+Dumfries and Galloway & \cellcolor{white}{1400.0\%} & \cellcolor{white}{1252.9\%} & \cellcolor{white}{1818.2\%} & \cellcolor{white}{2500.0\%} & \cellcolor{white}{}\\
+East Renfrewshire & \cellcolor{white}{ 159.7\%} & \cellcolor{white}{ 174.1\%} & \cellcolor{white}{ 181.6\%} & \cellcolor{white}{ 267.5\%} & \cellcolor{white}{1256.2\%}\\
+West Lothian & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{}\\
+Orkney Islands & \cellcolor{white}{ 121.8\%} & \cellcolor{white}{  89.9\%} & \cellcolor{white}{  90.7\%} & \cellcolor{white}{  89.9\%} & \cellcolor{white}{ 229.0\%}\\
+Angus & \cellcolor{white}{3166.7\%} & \cellcolor{white}{} & \cellcolor{white}{  39.6\%} & \cellcolor{white}{  35.4\%} & \cellcolor{white}{ 190.0\%}\\
+Na h-Eileanan an Iar & \cellcolor{white}{ 283.3\%} & \cellcolor{white}{ 276.6\%} & \cellcolor{white}{ 155.4\%} & \cellcolor{white}{ 166.2\%} & \cellcolor{white}{ 575.0\%}\\
+West Dunbartonshire & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{}\\
+Clackmannanshire & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{ 130.3\%} & \cellcolor{white}{ 147.4\%} & \cellcolor{white}{ 216.7\%}\\
+Shetland Islands & \cellcolor{white}{ 133.3\%} & \cellcolor{white}{  85.7\%} & \cellcolor{white}{ 253.8\%} & \cellcolor{white}{ 106.6\%} & \cellcolor{white}{ 192.3\%}\\
+North Lanarkshire & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{} & \cellcolor{white}{}\\
+\midrule
+Total & \cellcolor{white}{  48.4\%} & \cellcolor{white}{  49.5\%} & \cellcolor{white}{  47.0\%} & \cellcolor{white}{  46.9\%} & \cellcolor{white}{ 104.5\%}\\*
+\end{longtable}
+\endgroup{}
+
+\newpage
+
+\hypertarget{surpluses}{%
+\section{Surpluses}\label{surpluses}}
+
+Table \ref{tab:surplustab} shows the parking surpluses from 2016-17 to 2020-21 and the change from 2019-20 to 2020-21. It also shows the proportion that parking surpluses represent of total transport expenditure.
+
+The total \emph{surpluses} for Scotland amounted to £14.2 million between 4 authorities, of which the top three--Edinburgh City, Aberdeen City, and East Lothian--accounted for 100.0\%. 28 councils made a loss with the total of parking deficits rising to £16.1 million from £1.7 million last year.
+
+Overall, parking contributed £-1.9 million to local authority finances in Scotland in 2020-21 compared with £49.3 million in 2019-20.
+
+East Lothian increased their surplus by 361.9\%
+while Edinburgh City and Aberdeen City increased by -46.9\% and -77.9\% respectively (excluding North Lanarkshire with a surplus under £30,000). The biggest decreases were in Aberdeen City (77.9\%), and Edinburgh City (46.9 \%).
+
+Aberdeenshire increased their deficits by 322.5\% while Na h-Eileanan an Iar and Midlothian increased by 102.1\% and 50.0\% respectively (excluding Shetland Islands with a deficit under £30,000) The biggest decreases were in East Renfrewshire (28.3\%), and Scottish Borders (19.1\%)
+
+\newpage
+\begingroup\fontsize{10}{12}\selectfont
+
+\begin{longtable}[t]{rrrrrrrr}
+\caption{\label{tab:surplustab}Parking surpluses for Scotland (£,000)}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change 2020-21\\on\\2019-20} & \makecell[c]{Surplus\\as\\proportion\\of\\transport\\spending}\\
+\midrule
+\endfirsthead
+\caption[]{\label{tab:surplustab}Parking surpluses for Scotland (£,000) \textit{(continued)}}\\
+\toprule
+\multirow{1}{*}[0pt]{Local Authority} & \multirow{1}{*}[0pt]{2016-17} & \multirow{1}{*}[0pt]{2017-18} & \multirow{1}{*}[0pt]{2018-19} & \multirow{1}{*}[0pt]{2019-20} & \multirow{1}{*}[0pt]{2020-21} & \makecell[c]{Change 2020-21\\on\\2019-20} & \makecell[c]{Surplus\\as\\proportion\\of\\transport\\spending}\\
+\midrule
+\endhead
+
+\endfoot
+\bottomrule
+\multicolumn{8}{l}{\rule{0pt}{1em}\textsuperscript{*} Where the change in surplus is actually a change in deficit, the values are in italics}\\
+\endlastfoot
+Edinburgh City & 21,869 & 23,819 & 24,082 & 24,772 & 13,159 & -46.9\% & 73.8\%\\
+Aberdeen City & 3,219 & 3,322 & 2,888 & 4,077 & 903 & -77.9\% & 8.2\%\\
+East Lothian & -86 & -5 & -1 & 21 & 97 & 361.9\% & 1.4\%\\
+North Lanarkshire & 0 & 0 & 0 & 0 & 0 & 0.0\% & 0.0\%\\
+Shetland Islands & -9 & 4 & -20 & -6 & -12 & \em{100.0\%} & -0.1\%\\
+Clackmannanshire & 0 & 0 & -10 & -18 & -21 & \em{ 16.7\%} & -0.8\%\\
+East Ayrshire & 835 & 386 & 381 & 371 & -53 &  & -0.5\%\\
+Angus & -184 & -159 & 212 & 383 & -72 &  & -0.6\%\\
+South Ayrshire & 481 & 307 & 504 & 309 & -81 &  & -0.8\%\\
+Orkney Islands & -24 & 15 & 14 & 16 & -89 &  & -0.8\%\\
+West Dunbartonshire & -77 & -98 & -91 & -104 & -91 & \em{-12.5\%} & -1.5\%\\
+Na h-Eileanan an Iar & -66 & -83 & -41 & -47 & -95 & \em{102.1\%} & -1.4\%\\
+Falkirk & 142 & 136 & 205 & 342 & -153 &  & -1.6\%\\
+Midlothian & -229 & -211 & -164 & -104 & -156 & \em{ 50.0\%} & -2.4\%\\
+West Lothian & -149 & -144 & -173 & -175 & -169 & \em{ -3.4\%} & -1.2\%\\
+East Renfrewshire & -129 & -143 & -164 & -258 & -185 & \em{-28.3\%} & -2.0\%\\
+Renfrewshire & 763 & 597 & 504 & 444 & -186 &  & -1.4\%\\
+Highland & 481 & 644 & 1,130 & 1,092 & -192 &  & -0.5\%\\
+Dumfries and Galloway & -195 & -196 & -189 & -192 & -211 & \em{  9.9\%} & -1.8\%\\
+East Dunbartonshire & -157 & -190 & 82 & 176 & -227 &  & -2.7\%\\
+Inverclyde & 39 & -1 & 44 & 23 & -261 &  & -4.9\%\\
+North Ayrshire & -141 & -252 & -204 & -257 & -265 & \em{  3.1\%} & -2.3\%\\
+Argyll and Bute & 363 & 347 & 357 & 433 & -270 &  & -2.0\%\\
+Scottish Borders & -216 & -222 & -147 & -418 & -338 & \em{-19.1\%} & -2.5\%\\
+Moray & 328 & 242 & 523 & 403 & -356 &  & -4.8\%\\
+Aberdeenshire & -101 & -182 & -179 & -129 & -545 & \em{322.5\%} & -2.3\%\\
+Stirling & 74 & 525 & 379 & 409 & -866 &  & -8.9\%\\
+Dundee City & 903 & 1,693 & 2,122 & 2,424 & -967 &  & -9.8\%\\
+South Lanarkshire & 656 & 773 & 741 & 681 & -1,102 &  & -4.5\%\\
+Fife & 454 & 375 & 508 & 728 & -1,165 &  & -4.0\%\\
+Perth and Kinross & 510 & 726 & 878 & 708 & -1,283 &  & -8.6\%\\
+Glasgow City & 13,251 & 12,542 & 12,801 & 13,184 & -6,673 &  & -14.8\%\\
+\midrule
+Total deficit & -1,763 & -1,886 & -1,383 & -1,708 & -16,084 & \em{841.7\%} & -4.1\%\\
+Total surplus & 44,368 & 46,453 & 48,355 & 50,996 & 14,159 & -72.2\% & 23.6\%\\
+\midrule
+Total & 42,605 & 44,567 & 46,972 & 49,288 & -1,925 &  & -0.4\%\\*
+\end{longtable}
+\endgroup{}
+
+\newpage
+
+\hypertarget{comparison-between-local-government-finance-figures-and-transport-scotland-decriminalised-parking-enforcement-figures}{%
+\section{Comparison between Local Government Finance figures and Transport Scotland decriminalised parking enforcement figures}\label{comparison-between-local-government-finance-figures-and-transport-scotland-decriminalised-parking-enforcement-figures}}
+
+As mentioned in the introduction, there are now two sources of information from Scottish local authorities giving the income, expenditure and surpluses for parking: the Local Government Finance (LGF) figures, which cover all the parking activities; and the Transport Scotland figures (for those authorities operating DPE), which cover only the statutory elements of on-street parking and penalties, and do not include council-run off-street parking. Table 11 compares the two sets of figures. \emph{The differences between the two sources may not be due solely to off-street income and expenditure only being included in the LGF figures as it is possible that councils use different figures for overheads and other costs in reporting the two sets of figures. Also, Aberdeen City does not publish its data in the LGF figures and therefore this data has been extracted from its annual accounts (see Aberdeen City Council (2019 and 2020)).}
+
+The biggest difference in reported income is in Highland where the LGF figures show £0.9 million more income than the Transport Scotland set. Its expenditure is reported by LGF as £0.8 million higher, making the difference in the two surpluses £0.0 million. Glasgow's off-street car parks and on-street enforcement have been run by City Parking (Glasgow) LLP, a wholly-owned subsidiary of Glasgow Council since 2007.
+
+In Edinburgh City, the LGF income is £0.8 million higher. On the other hand Glasgow City has LGF income £2.2 million less than the DPE income, and Aberdeen City has LGF income reported to be £0.5 million less.
+
+\newpage
+\begin{landscape}
+\begin{table}[H]
+
+\caption{\label{tab:comparetab}Comparison of Local Government Finance and Transport for Scotland DPE parking accounts for 2020-21 (£,000)}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabular}[t]{rrrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Local Government Finance} & \multicolumn{3}{c}{Transport Scotland} & \multicolumn{3}{c}{Difference} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10}
+\multirow{1}{*}[0pt]{Local Authority} & Income & Expenditure & Surplus & Income & Expenditure & Surplus & Income & Expenditure & Surplus\\
+\midrule
+Aberdeen City & 3,717 & 2,814 & 903 & 4,184 & 3,098 & 1,086 & -467 & -284 & -183\\
+Aberdeenshire & 53 & 598 & -545 &  &  &  &  &  & \\
+Angus & 80 & 152 & -72 & 64 & 291 & -228 & 16 & -139 & 156\\
+Argyll and Bute & 618 & 888 & -270 & 618 & 275 & 343 & 0 & 613 & -613\\
+Clackmannanshire & 18 & 39 & -21 &  &  &  &  &  & \\
+Dumfries and Galloway & 0 & 211 & -211 &  &  &  &  &  & \\
+Dundee City & 1,743 & 2,710 & -967 & 1,620 & 2,508 & -888 & 123 & 202 & -79\\
+East Ayrshire & 515 & 568 & -53 & 515 & 711 & -196 & 0 & -143 & 143\\
+East Dunbartonshire & 246 & 473 & -227 & 248 & 316 & -68 & -2 & 157 & -159\\
+East Lothian & 632 & 535 & 97 & 647 & 464 & 183 & -15 & 71 & -86\\
+East Renfrewshire & 16 & 201 & -185 & 12 & 151 & -139 & 4 & 50 & -46\\
+Edinburgh City & 20,102 & 6,943 & 13,159 & 19,262 & 7,007 & 12,254 & 840 & -64 & 905\\
+Falkirk & 299 & 452 & -153 & 296 & 364 & -68 & 3 & 88 & -85\\
+Fife & 1,664 & 2,829 & -1,165 & 1,380 & 2,441 & -1,061 & 284 & 388 & -104\\
+Glasgow City & 7,580 & 14,253 & -6,673 & 9,734 & 6,965 & 2,769 & -2,154 & 7,288 & -9,442\\
+Highland & 1,454 & 1,646 & -192 & 589 & 823 & -234 & 865 & 823 & 42\\
+Inverclyde & 80 & 341 & -261 & 62 & 330 & -269 & 18 & 11 & 8\\
+Midlothian & 175 & 331 & -156 & 146 & 271 & -125 & 29 & 60 & -31\\
+Moray & 101 & 457 & -356 &  &  &  &  &  & \\
+Na h-Eileanan an Iar & 20 & 115 & -95 &  &  &  &  &  & \\
+North Ayrshire & 94 & 359 & -265 &  &  &  &  &  & \\
+North Lanarkshire & 0 & 0 & 0 & 108 & 180 & -72 & -108 & -180 & 72\\
+Orkney Islands & 69 & 158 & -89 &  &  &  &  &  & \\
+Perth and Kinross & 1,465 & 2,748 & -1,283 & 1,465 & 2,784 & -1,319 & 0 & -36 & 36\\
+Renfrewshire & 223 & 409 & -186 & 227 & 337 & -110 & -4 & 72 & -76\\
+Scottish Borders & 67 & 405 & -338 &  &  &  &  &  & \\
+Shetland Islands & 13 & 25 & -12 &  &  &  &  &  & \\
+South Ayrshire & 481 & 562 & -81 & 418 & 367 & 51 & 63 & 195 & -132\\
+South Lanarkshire & 378 & 1,480 & -1,102 & 496 & 1,508 & -1,013 & -118 & -28 & -89\\
+Stirling & 839 & 1,705 & -866 & 452 & 716 & -265 & 388 & 989 & -601\\
+West Dunbartonshire & 0 & 91 & -91 &  &  &  &  &  & \\
+West Lothian & 0 & 169 & -169 &  &  &  &  &  & \\
+\midrule
+Total & 42,742 & 44,667 & -1,925 & 42,543 & 31,908 & 10,634 & -236 & 10,132 & -10,367\\
+\bottomrule
+\multicolumn{10}{l}{\rule{0pt}{1em}\textsuperscript{*} The totals calculated in the final 'Differences' column only take into account LAs that have DPE}\\
+\end{tabular}
+\end{table}
+\end{landscape}
+
+\hypertarget{references}{%
+\subsection*{References}\label{references}}
+\addcontentsline{toc}{subsection}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.abd.2019}{}}%
+Aberdeen City Council. (2020). \emph{{Aberdeen City Council Annual Accounts 2019-20}}. Retrieved from \url{https://www.aberdeencity.gov.uk/sites/default/files/2020-08/ACC\%20Audited\%20Annual\%20Accounts\%202019-20.pdf} (Last visited on 26.4.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.abd.2020}{}}%
+Aberdeen City Council. (2021). \emph{{Aberdeen City Council Annual Accounts 2020-21}}. Retrieved from \url{https://www.aberdeencity.gov.uk/sites/default/files/2021-09/Aberdeen\%20City\%20Council\%20Audited\%20Annual\%20Accounts\%20202021.pdf} (Last visited on 28.4.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-GB.map.2018}{}}%
+Office for National Statistics. (2017). \emph{{Local Administrative Units Level 1 (January 2018) Super Generalised Clipped Boundaries in United Kingdom}}. Retrieved from \url{http://geoportal1-ons.opendata.arcgis.com/datasets/3dc07a60f46b4e01ab0ec8ba71c7a879_3.zip} (Last visited on 10.03.2019).
+
+\leavevmode\vadjust pre{\hypertarget{ref-GB.rpi.2018}{}}%
+Office for National Statistics. (2023). \emph{{Inflation and price indices}}. Retrieved from \url{https://www.ons.gov.uk/economy/inflationandpriceindices} (Last visited on 17.08.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.i.e.2016}{}}%
+Scottish Government. (2018). \emph{{Scottish Local Government Finance Statistics 2016-17 Annex A by LA}}. Retrieved from \url{https://www2.gov.scot/Resource/0053/00536018.xlsx} (Last visited on 10.03.2019).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.i.e.2017}{}}%
+Scottish Government. (2019). \emph{Scottish local government finance statistics 2017-18 annex a by LA}. Retrieved from \url{https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2018/02/scottish-local-government-financial-statistics-2016-17/documents/scottish-local-government-financial-statistics-2016-17-annex-a-by-la-table/scottish-local-government-financial-statistics-2016-17-annex-a-by-la-table/govscot\%3Adocument/Scottish\%2Blocal\%2Bgovernment\%2Bfinancial\%2Bstatistics\%2B2016-17\%2Bannex\%2Ba\%2Bby\%2Bla\%2Btable.xlsx} (Last visited on 20.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.i.e.2018}{}}%
+Scottish Government. (2020). \emph{Scottish local government finance statistics 2018-19: Local authority level analysis - net revenue expenditure by subservice}. Retrieved from \url{https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2020/02/scottish-local-government-finance-statistics-slgfs-2018-19/documents/slgfs-2018-19---la-level---2--net-revenue-expenditure-by-subservice/slgfs-2018-19---la-level---2--net-revenue-expenditure-by-subservice/govscot\%3Adocument/SLGFS\%2B2018-19\%2B-\%2BLA\%2BLevel\%2B-\%2B2.\%2BNet\%2BRevenue\%2BExpenditure\%2Bby\%2BSubservice.xlsx} (Last visited on 20.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.i.e.2019}{}}%
+Scottish Government. (2021). \emph{Scottish local government finance statistics 2019-20: Local authority level analysis - net revenue expenditure by subservice}. Retrieved from \url{https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2021/04/scottish-local-government-finance-statistics-slgfs-2019-20/documents/slgfs-2019-20-la-level-2-net-revenue-expenditure-subservice/slgfs-2019-20-la-level-2-net-revenue-expenditure-subservice/govscot\%3Adocument/slgfs-2019-20-la-level-2-net-revenue-expenditure-subservice.xlsx} (Last visited on 26.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.i.e.2020}{}}%
+Scottish Government. (2022). \emph{Scottish local government finance statistics 2010-21: Local authority level analysis - net revenue expenditure by subservice}. Retrieved from \url{https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2022/03/scottish-local-government-finance-statistics-slgfs-2020-21/documents/scottish-local-government-finance-statistics-slgfs-2020-21-la-level-net-revenue-expenditure-subservice/scottish-local-government-finance-statistics-slgfs-2020-21-la-level-net-revenue-expenditure-subservice/govscot\%3Adocument/scottish-local-government-finance-statistics-slgfs-2020-21-la-level-net-revenue-expenditure-subservice.xlsx} (Last visited on 26.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.i.e.2021}{}}%
+Scottish Government. (2023). \emph{Scottish local government finance statistics 2019-20: Local authority level analysis - net revenue expenditure by subservice}. Retrieved from \url{https://www.gov.scot/binaries/content/documents/govscot/publications/statistics/2023/02/scottish-local-government-finance-statistics-2021-22/documents/copy-scottish-local-government-finance-statistics-slgfs-2021-22-la-level-net-revenue-expenditure-subservice/copy-scottish-local-government-finance-statistics-slgfs-2021-22-la-level-net-revenue-expenditure-subservice/govscot\%3Adocument/copy-scottish-local-government-finance-statistics-slgfs-2021-22-la-level-net-revenue-expenditure-subservice.xlsx} (Last visited on 26.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pcn.2013}{}}%
+Transport Scotland. (2016). \emph{{Decriminalised Parking Enforcement: Local Authorites' Income and Expenditure: 2013 to 2016 }}. Retrieved from \url{http://www.parliament.scot/S5_Rural/Meeting\%20Papers/20161221_REC_Committee_Public_Paper.pdf} (Last visited on 10.03.2019).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pcn.2016}{}}%
+Transport Scotland. (2017). \emph{{Decriminalised Parking Enforcement: Local Authorites' Income and Expenditure: 2016 to 2017 }}. Retrieved from \url{https://www.transport.gov.scot/publication/decriminalised-parking-enforcement-local-authorities-income-and-expenditure-2016-to-2017/} (Last visited on 10.03.2019).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pdf.2017}{}}%
+Transport Scotland. (2018a). \emph{Decriminalised parking enforcement: Local authorites' income and expenditure: 2016 to 2017}. Retrieved from \url{https://www.transport.gov.scot/publication/decriminalised-parking-enforcement-local-authorities-income-and-expenditure-2017-to-2018/} (Last visited on 20.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pdf.2018}{}}%
+Transport Scotland. (2018b). \emph{Decriminalised parking enforcement: Local authorites' income and expenditure: 2018 to 2019}. Retrieved from \url{https://www.transport.gov.scot/media/46552/decriminalised-parking-enforcement-income-expenditure-annual-report-2018-19.pdf} (Last visited on 20.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pdf.2019}{}}%
+Transport Scotland. (2021a). \emph{Decriminalised parking enforcement: Local authorites' income and expenditure: 2018 to 2019}. Retrieved from \url{https://www.transport.gov.scot/media/46552/decriminalised-parking-enforcement-income-expenditure-annual-report-2019-20.pdf} (Last visited on 26.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pdf.2021}{}}%
+Transport Scotland. (2021b). \emph{Decriminalised parking enforcement: Local authorites' income and expenditure: 2021 to 2022}. Retrieved from \url{https://www.transport.gov.scot/media/52668/decriminalised-parking-enforcement-local-authorities-income-and-expenditure-2021-to-2022.pdf} (Last visited on 26.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Scotland.pdf.2020}{}}%
+Transport Scotland. (2022). \emph{Decriminalised parking enforcement: Local authorites' income and expenditure: 2020 to 2021}. Retrieved from \url{https://www.transport.gov.scot/media/51930/decriminalised-parking-enforcement-income-and-expenditure-2020-to-2021-revised-report-19-july-2022.pdf} (Last visited on 26.06.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-England.i.e.2021}{}}%
+UK Government. (2022). \emph{{Local authority revenue expenditure and financing England: 2021-22, individual local authority data - outturn}}. Retrieved from \url{https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1144979/RO2_2021-22_data_by_LA.ods} (Last visited on 18.04.2023).
+
+\leavevmode\vadjust pre{\hypertarget{ref-Wales.i.e.2017}{}}%
+Welsh Government. (2023). \emph{{Revenue outturn expenditure: roads and transport (Table LGFS0009)}}. Retrieved from \url{https://statswales.gov.wales/Catalogue/Local-Government/Finance/Revenue/Transport/RoadsAndTransportRevenueExpenditure-by-authority} (Last visited on 20.04.2023).
+
+\end{CSLReferences}
+
+\end{document}

@@ -15,6 +15,9 @@ header-includes:
   - \usepackage{colortbl}
   - \usepackage{flafter}
   - \usepackage{makecell}
+  - \usepackage{palatino}
+  - \renewcommand{\familydefault}{\sfdefault} % sans serif
+  - \fontfamily{ppl}\selectfont
 params:
   current.year: 2020
   dp.text: 1

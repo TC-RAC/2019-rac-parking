@@ -15,6 +15,9 @@ header-includes:
   - \usepackage{colortbl}
   - \usepackage{flafter}
   - \usepackage{makecell}
+  - \usepackage{palatino}
+  - \renewcommand{\familydefault}{\sfdefault} % sans serif
+  - \fontfamily{ppl}\selectfont
 params:
   current.year: 2020
   dp.text: 1
@@ -28,7 +31,7 @@ source(here::here("code/do-not-touch-scripts/wales.R"))
 ```
 
 ---
-title: "`r paste("Local Authority Parking Finances in Wales", params$current.year, "-", params$current.year-1999)`"
+title: "`r paste0("Local Authority Parking Finances in Wales ", params$current.year, "-", params$current.year-1999)`"
 nocite: |
   `r paste0(bib$refs, collapse = ", ")`
 ---

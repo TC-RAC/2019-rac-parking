@@ -142,7 +142,7 @@ and Expenditure: 2018 to 2019"
 source("code/do-not-touch-scripts/functions.R")
 if (!require("pacman")) install.packages("pacman")
 #tabulizer removed as no longer available on CRAN downloaded from Github
-pacman::p_load( tidyr,dplyr,tibble,RefManageR,googlesheets4,knitr,here,kableExtra,showtext,sf,viridis,tabulizer,bookdown,readxl)
+pacman::p_load( tidyr,dplyr,tibble,RefManageR,googlesheets4,knitr,here,kableExtra,showtext,sf,viridis,tabulizer,bookdown,readxl,DescTools)
 
 options(stringsAsFactors = FALSE)
 
@@ -239,6 +239,8 @@ if (add.new.data){
 master.update %>% filter(!auth.name%like% "DPE") %>% filter(auth.name!="")  %>% filter(auth.name!="Dunbartonshire") %>% filter(auth.name!="Eilean Siar") -> master.update
 # Shorten "and to "&"  
 master.update %>%   mutate(auth.name= stringr::str_replace(auth.name, " and "," & " )) ->master.update
+#Get rid of rows with "DPE" that have appeared for some reason
+master.update<-master.update[-grep("DPE",master.update$auth.name),]
 
    # double check the update is OK: 
   if (nrow(master.update) != 32) {
@@ -275,7 +277,7 @@ master.update %>%   mutate(auth.name= stringr::str_replace(auth.name, " and "," 
     write.csv(rpi,"data/01-raw/rpi.csv")
   }
   
-  # update RPI data acces date and year of publication in the bibliography
+  # update RPI data access date and year of publication in the bibliography
   bib.master %>%
     mutate(urldate = ifelse(content == "rpi",
                             as.character(format(Sys.Date(), "%d.%m.%Y")), urldate),
@@ -355,6 +357,11 @@ master.update %>%   mutate(auth.name= stringr::str_replace(auth.name, " and "," 
   filter(country %in% c("GB","Scotland") | country %in% c("England","Wales") & fiscyear == max(fiscyear)) %>%
     mutate(refs = paste0("@", key)) %>%
     column_to_rownames("key") -> bib.scotland
+
+#Get original DPE report reference added
+bib.master %>%   filter(country == "Scotland", fiscyear == 2013, content == "pcn") %>% mutate(refs = paste0("@", key))%>%
+  column_to_rownames("key")-> orig.DPE.2013
+bib.scotland<-rbind(bib.scotland,orig.DPE.2013)
   
   # create bib file
   bib.scotland %>%

@@ -244,11 +244,14 @@ if (add.new.data){
            auth.type = "LA",
            surplus.total = income.total - expend.total) -> master.update
   
-#Take some extra lines out - not sure wherte they come from (Tim)
+#Take some extra lines out - not sure where they come from (Tim)
  
-   master.update %>% filter(!auth.name%like% "DPE") %>% 
+   master.update %>% filter(!auth.name %like% "DPE") %>% 
      filter(auth.name!="")  %>% filter(auth.name!="Dunbartonshire") %>%
      filter(auth.name!="Eilean Siar") %>% filter(auth.name!="(Western Isles)") -> master.update
+   
+   master.update<-master.update[-grep("DPE",master.update$auth.name),]
+ #master[-grep("DPE",master$auth.name),]
   
    # double check the update is OK: 
   if (nrow(master.update) != 32) {
@@ -267,6 +270,8 @@ if (add.new.data){
       bind_rows(master.update) -> master}
   
   master %>% filter(auth.name!="(Western Isles)")-> master
+  #master<-master[grep("DPE",master$auth.name),]
+  
   # save updated datafile to master
   saveRDS(master, "data/03-processed/master.rds")
   write.csv(master, "outputs/csv-tables/master.csv")
@@ -365,6 +370,11 @@ if (add.new.data){
     mutate(refs = paste0("@", key)) %>%
     column_to_rownames("key") -> bib.scotland
   
+#Get original DPE report reference added
+bib.master %>%   filter(country == "Scotland", fiscyear == 2013, content == "pcn") %>% mutate(refs = paste0("@", key))%>%
+  column_to_rownames("key")-> orig.DPE.2013
+bib.scotland<-rbind(bib.scotland,orig.DPE.2013)
+
   # create bib file
   bib.scotland %>%
     as.BibEntry() %>%

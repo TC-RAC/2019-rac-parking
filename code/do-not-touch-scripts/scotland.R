@@ -27,6 +27,8 @@ suppressWarnings(suppressMessages(library(sf)))
 suppressWarnings(suppressMessages(library(viridis)))
 suppressWarnings(suppressMessages(library(classInt)))
 suppressWarnings(suppressMessages(library(colorspace)))
+suppressWarnings(suppressMessages(library(DescTools)))
+
 options(knitr.kable.NA = '')
 options(stringsAsFactors = FALSE)
 
@@ -928,6 +930,7 @@ sco.compare.tab %>%
 
 # add row with totals
 sco.compare.tab %>% 
+  arrange(auth.name)%>% 
   bind_rows(ungroup(.) %>% 
               summarise_at(vars(income.total:surplus.diff), 
                            list(~sum(., na.rm = TRUE))) %>% 
